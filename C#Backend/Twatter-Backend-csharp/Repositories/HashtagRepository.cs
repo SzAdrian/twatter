@@ -12,12 +12,11 @@ namespace Twatter_Backend_csharp.Repositories
 {
     public class HashtagRepository : IHashtagRepository
     {
-        private readonly DbContext _context;
         private DbSet<Hashtag> _hashtags;
-        public HashtagRepository(TrendingContext context)
+        public HashtagRepository(DbSet<Hashtag> hashtags)
         {
-            _context = context;
-            _hashtags = context.Hashtags;
+
+            _hashtags = hashtags;
         }
         public void Add(Hashtag entity)
         {

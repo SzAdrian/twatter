@@ -12,11 +12,10 @@ namespace Twatter_Backend_csharp.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly TrendingContext _context;
-
         public UnitOfWork(TrendingContext context)
         {
             _context = context;
-            HashtagRepository = new HashtagRepository(_context);
+            HashtagRepository = new HashtagRepository(_context.Hashtags);
         }
 
         public IHashtagRepository HashtagRepository { get; private set; }
