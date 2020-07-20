@@ -58,5 +58,36 @@ namespace Twatter_TrendingHashtagsController_Tests
 
             Assert.Equal(new { hashtag = "covid", count = 3 }, ListOfObjects[0]);
         }
+
+        [Fact]
+        public async void WeeklyTrendingHashtags_Returns_NotFoundObjectResult_With_WeeklyyHashtagsNotFound_When_RepositoryReturnsNull()
+        {
+            repository.HashtagRepository.GetWeeklyTrendingHashtags().ReturnsNull();
+
+            var result = await controller.WeeklyTrendingHashtags();
+            var NotFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
+            var WeeklyHashtagsNotFoundString = Assert.IsType<string>(NotFoundObjectResult.Value);
+
+            Assert.Equal(ControllerResponse.WeeklyHashtagsNotFound.ToString(), WeeklyHashtagsNotFoundString);
+        }
+
+        [Fact]
+        public async void WeeklyTrendingHashtags_Returns_OkObjectResult_With_ListOfHashtags()
+        {
+            var dbData = new List<object>();
+
+            dbData.Add(new { hashtag = "covid", count = 13 });
+            dbData.Add(new { hashtag = "summer", count = 8 });
+            dbData.Add(new { hashtag = "quarantine", count = 4 });
+
+            repository.HashtagRepository.GetWeeklyTrendingHashtags().Returns(dbData);
+
+            var result = await controller.WeeklyTrendingHashtags();
+            var OkObjectResult = Assert.IsType<OkObjectResult>(result);
+            var ListOfObjects = Assert.IsType<List<object>>(OkObjectResult.Value);
+
+            Assert.Equal(new { hashtag = "covid", count = 13 }, ListOfObjects[0]);
+        }
+
     }
 }

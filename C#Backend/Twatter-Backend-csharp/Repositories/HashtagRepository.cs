@@ -71,6 +71,29 @@ namespace Twatter_Backend_csharp.Repositories
             return GrouppedHashtags;
         }
 
+        public async Task<object> GetWeeklyTrendingHashtags()
+        {
+            var DateAWeekAgo = DateTime.Today.Subtract(TimeSpan.FromDays(7));
+
+            var WeeklyHashtags = await _hashtags
+                .Select(h => h)
+                .Where(h => h.Date > DateAWeekAgo)
+                .ToListAsync();
+
+            var GrouppedHashtags = WeeklyHashtags
+                .GroupBy(h => h.Name)
+                .Select(group => new
+                {
+                    Hashtag = group.Key,
+                    Count = group.Count()
+                }).OrderByDescending(h => h.Count)
+                .Take(20)
+                .ToList();
+
+            return GrouppedHashtags;
+        }
+
+
         public void Remove(Hashtag entity)
         {
             throw new NotImplementedException();
