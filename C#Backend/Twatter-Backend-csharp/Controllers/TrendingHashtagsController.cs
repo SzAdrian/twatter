@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Twatter_Backend_csharp.Controllers
 {
-    public class TrendingController : Controller
+    [Route("Trending")]
+    public class TrendingHashtagsController : Controller
     {
         // GET: /<controller>/
         public IActionResult Index()
