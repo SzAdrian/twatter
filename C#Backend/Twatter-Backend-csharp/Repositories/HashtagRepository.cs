@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Twatter_Backend_csharp.Context;
 using Twatter_Backend_csharp.Models;
@@ -28,7 +29,7 @@ namespace Twatter_Backend_csharp.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Hashtag> Find(Expression<Func<Hashtag, bool>> expression)
+        public Task<IEnumerable<Hashtag>> Find(Expression<Func<Hashtag, bool>> expression)
         {
             throw new NotImplementedException();
         }
@@ -46,6 +47,28 @@ namespace Twatter_Backend_csharp.Repositories
         public Task<Hashtag> GetById(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<object> GetDailyTrendingHashtags()
+        {
+            var TodaysDate = DateTime.Today.Subtract(new TimeSpan(12, 00, 00));
+
+            var DailyHashtags = await _hashtags
+                .Select(h => h)
+                .Where(h => h.Date > TodaysDate)
+                .ToListAsync();
+
+            var GrouppedHashtags = DailyHashtags
+                .GroupBy(h => h.Name) 
+                .Select(group => new
+                {
+                    Hashtag = group.Key,
+                    Count = group.Count() 
+                }).OrderByDescending(h => h.Count)
+                .Take(20)
+                .ToList();
+
+            return GrouppedHashtags;
         }
 
         public void Remove(Hashtag entity)
@@ -67,5 +90,6 @@ namespace Twatter_Backend_csharp.Repositories
         {
             throw new NotImplementedException();
         }
+
     }
 }
