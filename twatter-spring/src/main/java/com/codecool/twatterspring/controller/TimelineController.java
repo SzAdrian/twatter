@@ -21,5 +21,10 @@ public class TimelineController {
         return this.timelineService.getUserTimeline(user_id);
     }
 
+    @GetMapping("/tweets/{id}/home-timeline")
+    public List<TimelineTweetDTO> homeTimeline(@PathVariable("id") Long user_id){
+        return this.timelineService.getHomeTimeline(user_id);
+    }
+
 
 }

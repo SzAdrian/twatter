@@ -13,4 +13,8 @@ public class TimelineService {
     public List<TimelineTweetDTO> getUserTimeline(Long userId) {
         return tweetService.getAllByUserId(userId);
     }
+
+    public List<TimelineTweetDTO> getHomeTimeline(Long user_id) {
+        return tweetService.getAllOfFollowersBy(user_id);
+    }
 }
