@@ -14,8 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "`user`")
-public class User {
+public class TwatterUser {
 
     @Id
     @GeneratedValue
@@ -34,7 +33,7 @@ public class User {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<User> followers;
+    private List<TwatterUser> followers;
 
 
 }
