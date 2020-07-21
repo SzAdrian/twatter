@@ -7,6 +7,7 @@ using NSubstitute.ReturnsExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Twatter_Backend_csharp.Controllers.Responses;
 using System.Collections.Generic;
+using Twatter_Backend_csharp.Models;
 
 namespace Twatter_TrendingHashtagsController_Tests
 {
@@ -18,8 +19,8 @@ namespace Twatter_TrendingHashtagsController_Tests
         protected TestsBase()
         {
             // Do "global" initialization here; Called before every test method.
-            this.repository = Substitute.For<IUnitOfWork>();
-            this.controller = new TrendingHashtagsController(repository);
+            repository = Substitute.For<IUnitOfWork>();
+            controller = new TrendingHashtagsController(repository);
         }
 
         public void Dispose()
@@ -32,7 +33,7 @@ namespace Twatter_TrendingHashtagsController_Tests
         [Fact]
         public async void DailyTrendingHashtags_Returns_NotFoundObjectResult_With_DailyHashtagsNotFound_When_RepositoryReturnsNull()
         {
-            repository.HashtagRepository.GetDailyTrendingHashtags().ReturnsNull();
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
 
             var result = await controller.DailyTrendingHashtags();
             var NotFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
@@ -44,25 +45,28 @@ namespace Twatter_TrendingHashtagsController_Tests
         [Fact]
         public async void DailyTrendingHashtags_Returns_OkObjectResult_With_ListOfHashtags()
         {
-            var dbData = new List<object>();
+            object[] dbData = { new { hashtag = "covid", count = 13 },
+                new { hashtag = "summer", count = 8 },
+                new { hashtag = "quarantine", count = 4 }
+            };
+            var TodaysDate = DateTime.Today.Date;
 
-            dbData.Add(new { hashtag = "covid", count = 3 });
-            dbData.Add(new { hashtag = "sad", count = 1 });
-            dbData.Add(new { hashtag = "workout", count = 1 });
+            var list = new HashtagList { TimeFilter = TodaysDate, TrendingHashtags = dbData };
 
-            repository.HashtagRepository.GetDailyTrendingHashtags().Returns(dbData);
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).Returns(list);
 
             var result = await controller.DailyTrendingHashtags();
             var OkObjectResult = Assert.IsType<OkObjectResult>(result);
-            var ListOfObjects = Assert.IsType<List<object>>(OkObjectResult.Value);
+            var HashtagList = Assert.IsType<HashtagList>(OkObjectResult.Value);
 
-            Assert.Equal(new { hashtag = "covid", count = 3 }, ListOfObjects[0]);
+            Assert.Equal(new { hashtag = "covid", count = 13 }, HashtagList.TrendingHashtags[0]);
+            Assert.Equal(TodaysDate, HashtagList.TimeFilter);
         }
 
         [Fact]
         public async void WeeklyTrendingHashtags_Returns_NotFoundObjectResult_With_WeeklyyHashtagsNotFound_When_RepositoryReturnsNull()
         {
-            repository.HashtagRepository.GetWeeklyTrendingHashtags().ReturnsNull();
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
 
             var result = await controller.WeeklyTrendingHashtags();
             var NotFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
@@ -74,20 +78,56 @@ namespace Twatter_TrendingHashtagsController_Tests
         [Fact]
         public async void WeeklyTrendingHashtags_Returns_OkObjectResult_With_ListOfHashtags()
         {
-            var dbData = new List<object>();
+            object[] dbData = { new { hashtag = "covid", count = 13 },
+                new { hashtag = "summer", count = 8 },
+                new { hashtag = "quarantine", count = 4 }
+            };
 
-            dbData.Add(new { hashtag = "covid", count = 13 });
-            dbData.Add(new { hashtag = "summer", count = 8 });
-            dbData.Add(new { hashtag = "quarantine", count = 4 });
+            var DateAWeekAgo = DateTime.Today.Subtract(TimeSpan.FromDays(7));
 
-            repository.HashtagRepository.GetWeeklyTrendingHashtags().Returns(dbData);
+            var list = new HashtagList { TimeFilter = DateAWeekAgo, TrendingHashtags = dbData };
+
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).Returns(list);
 
             var result = await controller.WeeklyTrendingHashtags();
             var OkObjectResult = Assert.IsType<OkObjectResult>(result);
-            var ListOfObjects = Assert.IsType<List<object>>(OkObjectResult.Value);
+            var HashtagList = Assert.IsType<HashtagList>(OkObjectResult.Value);
 
-            Assert.Equal(new { hashtag = "covid", count = 13 }, ListOfObjects[0]);
+            Assert.Equal(new { hashtag = "covid", count = 13 }, HashtagList.TrendingHashtags[0]);
+            Assert.Equal(DateAWeekAgo, HashtagList.TimeFilter);
         }
 
+        [Fact]
+        public async void MothlyTrendingHashtags_Returns_NotFoundObjectResult_With_MothlyHashtagsNotFound_When_RepositoryReturnsNull()
+        {
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
+
+            var result = await controller.MonthlyTrendingHashtags();
+            var NotFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
+            var MonthlyHashtagsNotFoundString = Assert.IsType<string>(NotFoundObjectResult.Value);
+
+            Assert.Equal(ControllerResponse.MonthlyHashtagsNotFound.ToString(), MonthlyHashtagsNotFoundString);
+        }
+
+        [Fact]
+        public async void MonthlyTrendingHashtags_Returns_OkObjectResult_With_ListOfHashtags()
+        {
+            object[] dbData = { new { hashtag = "covid", count = 13 },
+                new { hashtag = "summer", count = 8 },
+                new { hashtag = "quarantine", count = 4 }
+            };
+            var TimeInterval = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+
+            var list = new HashtagList { TimeFilter = TimeInterval, TrendingHashtags = dbData };
+
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).Returns(list);
+
+            var result = await controller.MonthlyTrendingHashtags();
+            var OkObjectResult = Assert.IsType<OkObjectResult>(result);
+            var HashtagList = Assert.IsType<HashtagList>(OkObjectResult.Value);
+
+            Assert.Equal(new { hashtag = "covid", count = 13 }, HashtagList.TrendingHashtags[0]);
+            Assert.Equal(TimeInterval, HashtagList.TimeFilter);
+        }
     }
 }

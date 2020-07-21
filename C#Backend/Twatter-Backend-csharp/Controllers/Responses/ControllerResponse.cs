@@ -9,6 +9,9 @@ namespace Twatter_Backend_csharp.Controllers.Responses
     {
         InvalidModelState,
         DailyHashtagsNotFound,
-        WeeklyHashtagsNotFound
+        WeeklyHashtagsNotFound,
+        MonthlyHashtagsNotFound,
+        FilteredHashtagsNotFound,
+        InvalidTimeFilter
     }
 }
