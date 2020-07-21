@@ -17,13 +17,13 @@ public class TimelineController {
     private final TimelineService timelineService;
 
     @GetMapping("/users/{id}/user-timeline")
-    public List<TimelineTweetDTO> userTimeline(@PathVariable("id") Long user_id){
-        return this.timelineService.getUserTimeline(user_id);
+    public List<TimelineTweetDTO> userTimeline(@PathVariable("id") Long userId){
+        return this.timelineService.getUserTimeline(userId);
     }
 
     @GetMapping("/tweets/{id}/home-timeline")
-    public List<TimelineTweetDTO> homeTimeline(@PathVariable("id") Long user_id){
-        return this.timelineService.getHomeTimeline(user_id);
+    public List<TimelineTweetDTO> homeTimeline(@PathVariable("id") Long userId){
+        return this.timelineService.getHomeTimeline(userId);
     }
 
 

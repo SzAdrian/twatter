@@ -6,9 +6,9 @@ import lombok.Builder;
 @AllArgsConstructor
 @Builder
 public class TimelineTweetDTO {
-    private Long user_id;
+    private Long userId;
     private String username;
     private Long id;
     private String content;
-    private String posted_at;
+    private String postedAt;
 }
