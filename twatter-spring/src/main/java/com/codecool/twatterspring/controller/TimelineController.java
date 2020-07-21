@@ -10,8 +10,9 @@ import java.util.List;
 
 @RestController
 public class TimelineController {
+
     @GetMapping("/users/{id}/user-timeline")
-    public List<TimelineTweetDTO> userTimeline(@PathVariable Long user_id){
+    public List<TimelineTweetDTO> userTimeline(@PathVariable("id") Long user_id){
         return new ArrayList<>();
     }
 }
