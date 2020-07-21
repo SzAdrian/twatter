@@ -19,7 +19,9 @@ namespace Twatter_Backend_csharp.Repositories.Interface
         void Remove(Hashtag entity);
         void RemoveRange(IEnumerable<Hashtag> entities);
         void Update(Hashtag entity);
-        Task<object> GetDailyTrendingHashtags();
-        Task<object> GetWeeklyTrendingHashtags();
+        Task<HashtagList> GetTrendingHashtagsByTimeFilter(DateTime date);
+        //Task<HashtagList> GetDailyTrendingHashtags();
+        //Task<object> GetWeeklyTrendingHashtags();
+        //Task<HashtagList> GetMonthlyTrendingHashtags();
     }
 }

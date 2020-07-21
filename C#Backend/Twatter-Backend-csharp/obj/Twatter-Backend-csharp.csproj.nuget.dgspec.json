@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Klara\\Codes\\mastery\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj": {}
+    "E:\\Codecool-stuff\\TWweek\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj": {}
   },
   "projects": {
-    "D:\\Klara\\Codes\\mastery\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj": {
+    "E:\\Codecool-stuff\\TWweek\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Klara\\Codes\\mastery\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj",
+        "projectUniqueName": "E:\\Codecool-stuff\\TWweek\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj",
         "projectName": "Twatter-Backend-csharp",
-        "projectPath": "D:\\Klara\\Codes\\mastery\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj",
-        "packagesPath": "C:\\Users\\klara\\.nuget\\packages\\",
-        "outputPath": "D:\\Klara\\Codes\\mastery\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\obj\\",
+        "projectPath": "E:\\Codecool-stuff\\TWweek\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\Twatter-Backend-csharp.csproj",
+        "packagesPath": "C:\\Users\\Völgyi Dániel\\.nuget\\packages\\",
+        "outputPath": "E:\\Codecool-stuff\\TWweek\\Twatter\\twatter\\C#Backend\\Twatter-Backend-csharp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\klara\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Völgyi Dániel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -85,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
