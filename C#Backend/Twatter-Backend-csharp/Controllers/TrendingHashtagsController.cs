@@ -40,5 +40,25 @@ namespace Twatter_Backend_csharp.Controllers
             return Ok(DailyTrendingHashtags);
 
         }
+
+        [HttpGet("Weekly")]
+        public async Task<IActionResult> WeeklyTrendingHashtags()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ControllerResponse.InvalidModelState.ToString());
+            }
+
+            var WeeklyTrendingHashtags = await _repository.HashtagRepository.GetWeeklyTrendingHashtags();
+
+            if (WeeklyTrendingHashtags == null)
+            {
+                return NotFound(ControllerResponse.WeeklyHashtagsNotFound.ToString());
+            }
+
+            return Ok(WeeklyTrendingHashtags);
+
+        }
+
     }
 }

@@ -8,6 +8,7 @@ namespace Twatter_Backend_csharp.Controllers.Responses
     public enum ControllerResponse
     {
         InvalidModelState,
-        DailyHashtagsNotFound
+        DailyHashtagsNotFound,
+        WeeklyHashtagsNotFound
     }
 }
