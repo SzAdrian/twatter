@@ -18,7 +18,7 @@ public class TimelineController {
 
     @GetMapping("/users/{id}/user-timeline")
     public List<TimelineTweetDTO> userTimeline(@PathVariable("id") Long user_id){
-        return new ArrayList<>();
+        return this.timelineService.getUserTimeline(user_id);
     }
 
 
