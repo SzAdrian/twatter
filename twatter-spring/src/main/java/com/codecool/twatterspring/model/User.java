@@ -34,7 +34,7 @@ public class User {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<User> follower;
+    private List<User> followers;
 
 
 }
