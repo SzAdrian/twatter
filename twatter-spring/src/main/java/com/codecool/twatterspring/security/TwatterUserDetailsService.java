@@ -1,7 +1,6 @@
 package com.codecool.twatterspring.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import com.codecool.twatterspring.model.TwatterUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,23 +14,30 @@ import java.util.List;
 @Service
 public class TwatterUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    private final List<UserDetails> users = new ArrayList<>();
+    private final PasswordEncoder passwordEncoder;
+    private final List<TwatterUser> users = new ArrayList<>();
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.stream().filter(u -> username.equals(u.getUsername())).findFirst()
-            .orElseThrow((() -> new UsernameNotFoundException("Bad credentials.")));
+    public TwatterUserDetailsService(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     public void afterInit() {
-        var user = User.builder()
+        TwatterUser user = TwatterUser.builder()
             .username("user")
             .password(passwordEncoder.encode("user"))
-            .roles("USER")
+            .role("USER")
             .build();
         users.add(user);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return users.stream()
+            .filter(u -> username.equals(u.getUsername()))
+            .findFirst()
+            .map(TwatterUser::asUserDetails)
+            .orElseThrow((() -> new UsernameNotFoundException("Bad credentials.")));
+    }
+
 }

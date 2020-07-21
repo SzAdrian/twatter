@@ -49,11 +49,15 @@ public class JwtService {
             .compact();
     }
 
-    String getTokenFromRequest(HttpServletRequest req) {
-        if (req.getCookies() == null) return null;
-        return Arrays.stream(req.getCookies())
-            .filter(cookie -> cookie.getName().equals("JWT"))
-            .findFirst().map(Cookie::getValue).orElse(null);
+    Optional<Cookie> getTokenCookieFromRequest(HttpServletRequest request) {
+        if (request.getCookies() == null) return null;
+        return Arrays.stream(request.getCookies())
+            .filter(cookie -> "JWT".equals(cookie.getName()))
+            .findFirst();
+    }
+    
+    String getTokenFromRequest(HttpServletRequest request) {
+        return getTokenCookieFromRequest(request).map(Cookie::getValue).orElse(null);
     }
 
     boolean validateToken(String token) {
@@ -74,17 +78,5 @@ public class JwtService {
             .map(SimpleGrantedAuthority::new)
             .collect(Collectors.toCollection(LinkedList::new));
         return new UsernamePasswordAuthenticationToken(username, "", authorities);
-    }
-
-    public void invalidateTokenCookie(HttpServletRequest req, HttpServletResponse res) {
-        Cookie tokenCookie = Arrays.stream(req.getCookies())
-            .filter(cookie -> "JWT".equals(cookie.getName())).findFirst()
-            .orElseThrow(() -> new AuthenticationCredentialsNotFoundException(
-                "Token cookie not present, invalid logout request.")
-            );
-        tokenCookie.setPath("/");
-        tokenCookie.setHttpOnly(true);
-        tokenCookie.setMaxAge(0);
-        res.addCookie(tokenCookie);
     }
 }
