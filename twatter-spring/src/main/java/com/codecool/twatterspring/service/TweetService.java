@@ -8,4 +8,8 @@ public class TweetService {
     public List<TimelineTweetDTO> getAllByUserId(Long userId) {
         return null;
     }
+
+    public List<TimelineTweetDTO> getAllOfFollowersBy(Long userId) {
+        return null;
+    }
 }
