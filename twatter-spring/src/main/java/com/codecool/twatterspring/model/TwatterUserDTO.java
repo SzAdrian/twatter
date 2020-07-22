@@ -8,13 +8,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @Builder
 public class TwatterUserDTO {
+    private Long id;
     private String username;
+    private String email;
+    private LocalDateTime registrationDate;
     private String password;
     @Singular
     private List<String> roles;
@@ -30,6 +34,17 @@ public class TwatterUserDTO {
             .username(username)
             .password(password)
             .authorities(getGrantedAuthorities())
+            .build();
+    }
+
+    public static TwatterUserDTO fromEntity(TwatterUser twatterUser) {
+        return TwatterUserDTO.builder()
+            .id(twatterUser.getId())
+            .username(twatterUser.getName())
+            .password(twatterUser.getPassword())
+            .email(twatterUser.getEmail())
+            .registrationDate(twatterUser.getRegistrationDate())
+            .role("USER")
             .build();
     }
 }
