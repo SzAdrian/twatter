@@ -30,21 +30,42 @@ const TrendsForYouStyle = styled.div`
     .trend-title-container i {
         font-size: 2rem;
         color: rgb(29, 161, 242);
-        margin-right: 7px;
+        padding: 5px 10px;
+        border-radius: 5rem;
+        cursor: pointer;
     }
+    
+    .trend-title-container i:hover {
+        background-color: rgba(68,110,163,0.2);
+    }
+    
     
     .trend-items {
         position: relative;
         padding: 10px 15px;
         border-bottom: 1px solid rgb(56, 68, 77);
+        transition: background-color .25s ease;
+        cursor: pointer;
+    }
+    
+    .trend-items:hover {
+        background-color: rgba(125,134,146,0.2);
     }
     
     .trend-items i {
         position: absolute;
-        top: 15px;
-        right: 18px;
+        top: 7px;
+        right: 10px;
         font-size: 1.4rem;
         color: rgb(136, 153, 166);
+        padding: 8px;
+        border-radius: 3rem;
+        transition: background-color .24s ease;
+        cursor: pointer;
+    }
+    
+    .trend-items i:hover {
+        background-color: rgba(68,110,163,0.34);
     }
     
     .trend-types {
@@ -72,6 +93,12 @@ const TrendsForYouStyle = styled.div`
         font-size: 1.5rem;
         color: rgb(29, 161, 242);
         padding: 13px 15px;
+        transition: background-color .24s ease;
+        cursor: pointer;
+    }
+    
+    .show-more:hover {
+        background-color: rgba(125,134,146,0.2);
     }
     
     
