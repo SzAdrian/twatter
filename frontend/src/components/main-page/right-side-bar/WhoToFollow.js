@@ -7,7 +7,7 @@ const WhoToFollowStyle = styled.div`
     
     background-color: rgb(25, 39, 52);
     width: 350px;
-    height: 235px;
+    min-height: 200px;
     border-radius: 1.5rem;
     margin-bottom: 15px;
     
@@ -21,13 +21,81 @@ const WhoToFollowStyle = styled.div`
         border-bottom: 1px solid rgb(56, 68, 77);
     }
     
+    .who-to-follow-items {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 5fr;
+        padding: 10px 15px;
+        border-bottom: 1px solid rgb(56, 68, 77);
+        transition: background-color .24s ease;
+        cursor: pointer;
+    }
     
+    .who-to-follow-items:hover {
+         background-color: rgba(125,134,146,0.2);
+    }
+   
     
     
     .who-to-follow-items img {
-        width: 40px;
+        width: 50px;
+        background-color: white;
+        border-radius: 3rem;
     }
 
+
+    .who-to-follow-items-content {
+        margin-left: 10px;
+    }
+    
+    .who-to-follow-item-names {
+        display: flex;
+        flex-direction: row;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    
+    .who-to-follow-item-tags {
+        color: rgb(136, 153, 166);
+        font-size: 1.3rem;
+    }
+    
+    .follow-button {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        background-color: rgb(0, 0, 0, 0);
+        border: 1px solid rgb(29, 161, 242);
+        width: 75px;
+        height: 30px;
+        border-radius: 3rem;
+        color: rgb(29, 161, 242);
+        font-size: 1.4rem;
+        font-weight: 600;
+        font-family: Arial,serif;
+        transition: background-color .24s ease;
+        cursor: pointer;
+    }
+    
+    .follow-button:hover {
+        background-color: rgba(58,92,135,0.2);
+    }
+    
+    .show-more {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        font-size: 1.5rem;
+        color: rgb(29, 161, 242);
+        padding: 13px 15px;
+        transition: background-color .24s ease;
+        cursor: pointer;
+    }
+    
+    .show-more:hover {
+        background-color: rgba(125,134,146,0.2);
+    }
 `
 
 
@@ -60,6 +128,7 @@ function WhoToFollow() {
                     <button className="follow-button"> Follow</button>
                 </div>
             </div>
+            <div className="show-more">Show more</div>
 
 
         </WhoToFollowStyle>
