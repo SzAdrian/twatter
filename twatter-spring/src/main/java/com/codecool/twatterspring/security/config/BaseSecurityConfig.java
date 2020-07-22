@@ -26,7 +26,7 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
             .authorizeRequests()
-                .antMatchers("/auth/login")
+                .antMatchers("/auth/login", "/auth/registration")
                 .permitAll()
                 .and()
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
