@@ -9,6 +9,10 @@ const RightSideBarStyle = styled.div`
 
     grid-area: rightBar;
     margin-left: 20px;
+    
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
 
 `
 

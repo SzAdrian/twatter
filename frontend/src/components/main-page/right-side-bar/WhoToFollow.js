@@ -6,7 +6,7 @@ import image from "../../../gorillatwatter.png";
 const WhoToFollowStyle = styled.div`
     
     background-color: rgb(25, 39, 52);
-    width: 350px;
+    width: 100%;
     min-height: 200px;
     border-radius: 1.5rem;
     margin-bottom: 15px;
@@ -15,7 +15,7 @@ const WhoToFollowStyle = styled.div`
         font-size: 2rem;
         color: white;
         font-weight: 900;
-        width: 350px;
+        width: 100%;
         height: 45px;
         padding: 10px 15px;
         border-bottom: 1px solid rgb(56, 68, 77);

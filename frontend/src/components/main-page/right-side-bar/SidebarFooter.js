@@ -5,7 +5,9 @@ import {Link} from "react-router-dom";
 
 const SidebarFooterStyle = styled.div`
     
-    width: 350px;
+    
+    
+    width: 100%;
     height: 50px;
     display: flex;
     flex-direction: row;

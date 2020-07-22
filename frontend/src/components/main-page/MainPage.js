@@ -12,10 +12,18 @@ const MainPageStyle = styled.div`
     left: 50%;
     transform: translateX(-50%);
     display: grid;
-    grid-template-columns: 275px 660px 350px;
-    grid-template-areas: 'leftBar middleBar rightBar' ;
+    grid-template-columns: 275px 660px 380px;
+    grid-template-areas: 'leftBar middleBar rightBar';
     
     
+    @media screen and (max-width: 1100px) {
+        grid-template-columns: 275px 660px 300px;
+    }
+    
+     @media screen and (max-width: 1000px) {
+        grid-template-columns: 275px 660px;
+        grid-template-areas: 'leftBar middleBar';
+    }
     
 `
 
