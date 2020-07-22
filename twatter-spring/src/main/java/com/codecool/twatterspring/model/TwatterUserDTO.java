@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Data
 @Builder
-public class TwatterUser {
+public class TwatterUserDTO {
     private String username;
     private String password;
     @Singular
