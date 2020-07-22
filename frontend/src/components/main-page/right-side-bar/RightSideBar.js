@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
+import TrendsForYou from "./TrendsForYou";
+import WhoToFollow from "./WhoToFollow";
+import SidebarFooter from "./SidebarFooter";
 
 const RightSideBarStyle = styled.div`
 
@@ -15,9 +18,9 @@ function RightSideBar() {
     return (
         <RightSideBarStyle>
             <SearchBar />
-            {/*<TreandsForYou />*/}
-            {/*<WhoToFollow />*/}
-            {/*<SidebarFooter />*/}
+            <TrendsForYou />
+            <WhoToFollow />
+            <SidebarFooter />
         </RightSideBarStyle>
     )
 

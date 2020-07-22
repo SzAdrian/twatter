@@ -18,7 +18,7 @@ const MiddleBarStyle = styled.div`
         width: 100%;
         max-width: 660px;
         height: 53px;
-        border-bottom: 1px solid rgb(56, 68, 77);;
+        border-bottom: 1px solid rgb(56, 68, 77);
         
     }
     
