@@ -38,7 +38,7 @@ public class TwatterUserDaoMem implements TwatterUserDao {
 
     @Override
     public void save(AuthDTO userDTO) {
-        users.add(createUser(userDTO.getUsername(), passwordEncoder.encode(userDTO.getPassword()), "USER"));
+        users.add(createUser(userDTO.getUsername(), userDTO.getPassword(), "USER"));
     }
 
     private TwatterUserDTO createUser(String username, String password, String... roles) {
