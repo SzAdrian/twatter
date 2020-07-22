@@ -14,6 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtFilter jwtFilter;
+    private final String[] SWAGGER_WHITELIST = {
+        "/swagger-resources/**",
+        "/swagger-ui.html",
+        "/v2/api-docs",
+        "/webjars/**"
+    };
 
     public BaseSecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
@@ -26,8 +32,10 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
             .authorizeRequests()
-                .antMatchers("/auth/login", "/auth/registration")
-                .permitAll()
+                .antMatchers("/api/auth/login", "/api/auth/registration", "/favicon*")
+                    .permitAll()
+                .antMatchers(SWAGGER_WHITELIST)
+                    .permitAll()
                 .and()
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }

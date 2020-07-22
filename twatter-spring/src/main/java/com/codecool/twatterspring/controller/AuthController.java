@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/api/auth")
 @Slf4j
 public class AuthController {
 

@@ -22,12 +22,12 @@ public class PrototypingSecurityConfig extends BaseSecurityConfig {
             .csrf()
                 .disable()
             .authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/dev/login")
                     .permitAll()
                 .anyRequest()
                     .authenticated()
                 .and()
             .exceptionHandling()
-                .authenticationEntryPoint((req, resp, e) -> resp.sendRedirect("/login"));
+                .authenticationEntryPoint((req, resp, e) -> resp.sendRedirect("/dev/login"));
     }
 }
