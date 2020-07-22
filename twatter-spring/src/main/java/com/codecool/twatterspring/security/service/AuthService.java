@@ -88,8 +88,10 @@ public class AuthService {
     }
 
     public boolean tryRegister(AuthDTO registrationDTO) {
-        if (userDao.exists(registrationDTO.getUsername()))
+        if (userDao.exists(registrationDTO.getUsername())) {
+            log.warn("Username '" + registrationDTO.getUsername() + "' already exists!");
             return false;
+        }
         userDao.save(registrationDTO);
         return true;
     }
