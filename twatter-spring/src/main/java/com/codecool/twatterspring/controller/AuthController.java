@@ -35,4 +35,10 @@ public class AuthController {
         log.info("Logging out...");
         authService.logout(response);
     }
+    
+    @PostMapping("registration")
+    public boolean register(AuthDTO registrationDTO) {
+        log.info("Registration request received: " + registrationDTO.toString());
+        return authService.tryRegister(registrationDTO);
+    }
 }
