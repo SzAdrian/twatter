@@ -35,7 +35,7 @@ const MiddleBarStyle = styled.div`
 
     .middle-bar-container {
         position: relative;
-        top: 53px;
+        top: 54px;
     }
     
     .csiik {

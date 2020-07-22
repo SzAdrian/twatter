@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import SearchBar from "./SearchBar";
 
 const RightSideBarStyle = styled.div`
 
     grid-area: rightBar;
-    background-color: yellow;
+    margin-left: 20px;
 
 `
 
@@ -13,7 +14,10 @@ function RightSideBar() {
 
     return (
         <RightSideBarStyle>
-
+            <SearchBar />
+            {/*<TreandsForYou />*/}
+            {/*<WhoToFollow />*/}
+            {/*<SidebarFooter />*/}
         </RightSideBarStyle>
     )
 
