@@ -1,4 +1,4 @@
-package com.codecool.twatterspring.security;
+package com.codecool.twatterspring.security.service;
 
 import com.codecool.twatterspring.model.TwatterUser;
 import org.springframework.security.core.userdetails.UserDetails;

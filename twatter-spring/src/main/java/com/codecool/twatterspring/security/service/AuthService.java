@@ -1,4 +1,4 @@
-package com.codecool.twatterspring.security;
+package com.codecool.twatterspring.security.service;
 
 import com.codecool.twatterspring.model.AuthDTO;
 import lombok.extern.slf4j.Slf4j;

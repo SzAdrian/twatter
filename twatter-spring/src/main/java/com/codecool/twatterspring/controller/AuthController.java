@@ -1,7 +1,7 @@
 package com.codecool.twatterspring.controller;
 
 import com.codecool.twatterspring.model.AuthDTO;
-import com.codecool.twatterspring.security.AuthService;
+import com.codecool.twatterspring.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

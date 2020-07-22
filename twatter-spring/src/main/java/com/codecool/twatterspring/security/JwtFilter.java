@@ -1,5 +1,6 @@
 package com.codecool.twatterspring.security;
 
+import com.codecool.twatterspring.security.service.JwtService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;

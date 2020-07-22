@@ -1,9 +1,7 @@
-package com.codecool.twatterspring.security;
+package com.codecool.twatterspring.security.service;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -49,18 +46,18 @@ public class JwtService {
             .compact();
     }
 
-    Optional<Cookie> getTokenCookieFromRequest(HttpServletRequest request) {
+    public Optional<Cookie> getTokenCookieFromRequest(HttpServletRequest request) {
         if (request.getCookies() == null) return null;
         return Arrays.stream(request.getCookies())
             .filter(cookie -> "JWT".equals(cookie.getName()))
             .findFirst();
     }
     
-    String getTokenFromRequest(HttpServletRequest request) {
+    public String getTokenFromRequest(HttpServletRequest request) {
         return getTokenCookieFromRequest(request).map(Cookie::getValue).orElse(null);
     }
 
-    boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return claims.getBody().getExpiration().after(new Date());
@@ -70,7 +67,7 @@ public class JwtService {
         return false;
     }
 
-    Authentication parseUserFromTokenInfo(String token) throws UsernameNotFoundException {
+    public Authentication parseUserFromTokenInfo(String token) throws UsernameNotFoundException {
         Claims body = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
         var username = body.getSubject();
         var roles = (List<String>) body.get(rolesFieldName);
