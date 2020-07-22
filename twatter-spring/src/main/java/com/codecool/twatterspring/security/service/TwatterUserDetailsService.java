@@ -1,43 +1,25 @@
 package com.codecool.twatterspring.security.service;
 
-import com.codecool.twatterspring.model.TwatterUser;
+import com.codecool.twatterspring.model.TwatterUserDTO;
+import com.codecool.twatterspring.service.dao.TwatterUserDao;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TwatterUserDetailsService implements UserDetailsService {
 
-    private final PasswordEncoder passwordEncoder;
-    private final List<TwatterUser> users = new ArrayList<>();
+    private final TwatterUserDao userDao;
 
-    public TwatterUserDetailsService(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    @PostConstruct
-    public void afterInit() {
-        TwatterUser user = TwatterUser.builder()
-            .username("user")
-            .password(passwordEncoder.encode("user"))
-            .role("USER")
-            .build();
-        users.add(user);
+    public TwatterUserDetailsService(TwatterUserDao twatterUserDao) {
+        this.userDao = twatterUserDao;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return users.stream()
-            .filter(u -> username.equals(u.getUsername()))
-            .findFirst()
-            .map(TwatterUser::asUserDetails)
+        return userDao.findBy(username)
+            .map(TwatterUserDTO::asUserDetails)
             .orElseThrow((() -> new UsernameNotFoundException("Bad credentials.")));
     }
-
 }
