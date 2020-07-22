@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-@Profile("dev")
+@Profile("development")
 public class PrototypingSecurityConfig extends BaseSecurityConfig {
 
     public PrototypingSecurityConfig(JwtFilter jwtFilter) {
