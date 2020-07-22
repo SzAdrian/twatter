@@ -7,13 +7,13 @@ const SearchBarStyle = styled.div`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 50px;
+    height: 42px;
     background-color: rgb(37, 51, 65);
     border-radius: 4rem;
-    margin: 5px;
+    margin: 5px 5px 15px 5px;
 
     i {
-        color: grey;
+        color: rgb(136, 153, 166);
         font-size: 25px;
         height: 25px;
         margin: 17px;
@@ -21,14 +21,14 @@ const SearchBarStyle = styled.div`
     }
     
     .search-input {
-        font-size: 2rem;
+        font-size: 1.7rem;
         font-weight: 100;
         font-family: Arial,serif;
         background-color: rgb(0, 0, 0, 0);
         border: none;
         width: 100%;
         height: 100%;
-        color: #b8b1b1;
+        color: rgb(136, 153, 166);
         outline: none;
     }
 
