@@ -1,6 +1,7 @@
 package com.codecool.twatterspring.security.service;
 
 import com.codecool.twatterspring.model.AuthDTO;
+import com.codecool.twatterspring.service.dao.TwatterUserDao;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,13 +21,16 @@ public class AuthService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final TwatterUserDao userDao;
 
     public static final String TOKEN_COOKIE_NAME = "JWT";
 
     public AuthService(AuthenticationManager authenticationManager,
-                       JwtService jwtService) {
+                       JwtService jwtService,
+                       TwatterUserDao twatterUserDao) {
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.userDao = twatterUserDao;
     }
 
     public boolean tryLogin(AuthDTO loginDTO, HttpServletResponse response) {
@@ -81,5 +85,12 @@ public class AuthService {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(0);
         response.addCookie(cookie);
+    }
+
+    public boolean tryRegister(AuthDTO registrationDTO) {
+        if (userDao.exists(registrationDTO.getUsername()))
+            return false;
+        userDao.save(registrationDTO);
+        return true;
     }
 }
