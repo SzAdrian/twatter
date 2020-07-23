@@ -3,16 +3,21 @@ package com.codecool.twatterspring.service;
 import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
 import com.codecool.twatterspring.model.dto.OutgoingTweetDTO;
+import com.codecool.twatterspring.model.dto.TimelineTweetDTO;
+import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TweetService {
 
     private final TweetRepository tweets;
+    private final TwatterUserRepository users;
 
     public OutgoingTweetDTO saveNewTweet(IncomingTweetDTO dto) {
         Tweet tweet = Tweet.builder()
@@ -27,5 +32,17 @@ public class TweetService {
                                .id(tweet.getId())
                                .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
                                .build();
+    }
+    public List<TimelineTweetDTO> provideTweetsForUserTimelineBy(Long userId) {
+        List<Tweet> userTweets = tweets.findAllByUserId(userId);
+        return userTweets.stream()
+                         .map(tweet -> TimelineTweetDTO.builder()
+                                           .id(tweet.getId())
+                                           .content(tweet.getContent())
+                                           .userId(tweet.getUserId())
+                                           .userName(users.getUsernameByUserId(tweet.getUserId()))
+                                           .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
+                                           .build())
+                         .collect(Collectors.toList());
     }
 }
