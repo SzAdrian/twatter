@@ -13,6 +13,8 @@ namespace Twatter_Backend_csharp.Controllers.Responses
         MonthlyHashtagsNotFound,
         FilteredHashtagsNotFound,
         InvalidTimeFilter,
-        InvalidDateFormat
+        InvalidDateFormat,
+        AddingHashtagSuccesfull,
+        AddingHashtagFailed
     }
 }

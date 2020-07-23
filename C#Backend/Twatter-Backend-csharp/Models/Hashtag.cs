@@ -7,8 +7,9 @@ namespace Twatter_Backend_csharp.Models
     {
         public int Id { get; set; }
         [Required]
+        [RegularExpression(@"^\w+$", ErrorMessage = "Hashtag cannot contain special or break characters.")]
         public string Name { get; set; }
-        [Required]
+        
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
     }

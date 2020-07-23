@@ -14,7 +14,7 @@ namespace Twatter_Backend_csharp.Repositories.Interface
         Task<IEnumerable<Hashtag>> GetAll();
         Task<IEnumerable<Hashtag>> Find(Expression<Func<Hashtag, bool>> expression);
         Task<Hashtag> SingleOrDefault(Expression<Func<Hashtag, bool>> expression);
-        void Add(Hashtag entity);
+        Task<bool> Add(Hashtag entity);
         void AddRange(IEnumerable<Hashtag> entities);
         void Remove(Hashtag entity);
         void RemoveRange(IEnumerable<Hashtag> entities);
