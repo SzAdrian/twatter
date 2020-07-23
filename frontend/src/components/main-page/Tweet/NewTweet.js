@@ -5,7 +5,7 @@ const NewTweetStyle = styled.div`
 
 
     
-    width: 660px;
+    width: 100%px;
     height: 100px;
     input {
         background-color: rgb(21, 32, 43);
