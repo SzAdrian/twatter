@@ -3,8 +3,7 @@ package com.codecool.twatterspring.service;
 import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
 import com.codecool.twatterspring.model.dto.OutgoingTweetDTO;
-import com.codecool.twatterspring.repository.TweetRepositorty;
-import lombok.Builder;
+import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
@@ -13,7 +12,7 @@ import java.time.ZoneOffset;
 @RequiredArgsConstructor
 public class TweetService {
 
-    private final TweetRepositorty tweets;
+    private final TweetRepository tweets;
 
     public OutgoingTweetDTO saveNewTweet(IncomingTweetDTO dto) {
         Tweet tweet = Tweet.builder()

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TweetRepositorty extends JpaRepository<Tweet, Long> {
+public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
     List<Tweet> findAllByUserId(Long id);
 

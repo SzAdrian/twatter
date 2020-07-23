@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class IncomingTweetDTO {
-
     private Long userId;
     private String content;
 }
