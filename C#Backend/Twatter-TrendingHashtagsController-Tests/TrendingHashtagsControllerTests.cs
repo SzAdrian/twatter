@@ -192,5 +192,48 @@ namespace Twatter_TrendingHashtagsController_Tests
             Assert.Equal(new { hashtag = "summer", count = 8 }, HashtagList.TrendingHashtags[1]);
             Assert.Equal(ValidDateDateTimeFormat, HashtagList.TimeFilter);
         }
+
+        [Fact]
+        public async void AddHashtag_CalledWithNull_Returns_BadRequestObjectResult_With_HashtagCannotBeNull()
+        {
+            var ExpectedhashtagCannotbeNullString = ControllerResponse.HashtagCannotBeNull.ToString();
+
+            var result = await controller.AddHashtag(null);
+            var BadRequestObjectResult = Assert.IsType<BadRequestObjectResult>(result);
+            var HashtagCannotbeNullString = Assert.IsType<string>(BadRequestObjectResult.Value);
+
+            Assert.Equal(ExpectedhashtagCannotbeNullString, HashtagCannotbeNullString);
+        }
+
+        [Fact]
+        public async void AddHashtag_CalledWithValidhashtag_Returns_OkObjectResult_With_AddingHashtagSuccesfull()
+        {
+            var ExpectedAddingHashtahSuccesfullString = ControllerResponse.AddingHashtagSuccesfull.ToString();
+            var ValidHashtag = new Hashtag { Name = "Lollipop", Date = DateTime.Now };
+
+            repository.HashtagRepository.Add(Arg.Any<Hashtag>()).Returns(true);
+            var result = await controller.AddHashtag(ValidHashtag);
+            var OkObjectResult = Assert.IsType<OkObjectResult>(result);
+            var AddingHashtahSuccesfullString = Assert.IsType<string>(OkObjectResult.Value);
+
+            Assert.Equal(ExpectedAddingHashtahSuccesfullString, AddingHashtahSuccesfullString);
+
+        }
+
+        [Fact]
+        public async void AddHashtag_CalledWithValidHashtag_And_ReposytoryFailsToAdd_Returns_Statuscode500_With_AddingHashtagFailed()
+        {
+            var ExpectedAddingHashtahFailedString = ControllerResponse.AddingHashtagFailed.ToString();
+            var ValidHashtag = new Hashtag { Name = "Lollipop", Date = DateTime.Now };
+
+            repository.HashtagRepository.Add(Arg.Any<Hashtag>()).Returns(false);
+            var result = await controller.AddHashtag(ValidHashtag);
+            var ObjectResult = Assert.IsType<ObjectResult>(result);
+            var AddingHashtahFailedString = Assert.IsType<string>(ObjectResult.Value);
+
+            Assert.Equal(500, ObjectResult.StatusCode);
+            Assert.Equal(ExpectedAddingHashtahFailedString, AddingHashtahFailedString);
+
+        }
     }
 }

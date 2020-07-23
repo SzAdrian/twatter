@@ -30,6 +30,11 @@ namespace Twatter_Backend_csharp.Controllers
                 return BadRequest(ControllerResponse.InvalidModelState.ToString());
             }
 
+            if(hashtag == null)
+            {
+                return BadRequest(ControllerResponse.HashtagCannotBeNull.ToString());
+            }
+
             hashtag.Date = DateTime.Now;
             var result = await _repository.HashtagRepository.Add(hashtag);
 

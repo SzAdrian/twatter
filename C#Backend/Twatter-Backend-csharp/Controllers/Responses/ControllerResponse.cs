@@ -15,6 +15,7 @@ namespace Twatter_Backend_csharp.Controllers.Responses
         InvalidTimeFilter,
         InvalidDateFormat,
         AddingHashtagSuccesfull,
-        AddingHashtagFailed
+        AddingHashtagFailed,
+        HashtagCannotBeNull
     }
 }
