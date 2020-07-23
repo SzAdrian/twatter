@@ -2,8 +2,12 @@ import React from "react";
 import InputField from "./InputField";
 import TwatterLogo from "../shared/TwatterLogo";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 
 export default function LoginPage() {
+  const { handleSubmit, register, errors } = useForm();
+  const onSubmit = (values) => console.log(values);
+
   let LoginStyle = styled.div`
     max-width: 600px;
     width: 100%;
@@ -46,6 +50,7 @@ export default function LoginPage() {
       background-color: rgb(29, 161, 242);
       min-width: 78.89px;
       min-height: 49px;
+      width: 100%;
       outline-style: none;
       transition-property: background-color, box-shadow;
       display: flex;
@@ -94,6 +99,7 @@ export default function LoginPage() {
       -webkit-box-pack: center;
       justify-content: center;
       text-align: center;
+      align-self: center;
     }
     .links {
       font-weight: 400;
@@ -125,21 +131,26 @@ export default function LoginPage() {
       <h1 className="h1">
         <span className="span">Log in to Twatter</span>
       </h1>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
+          refi={register({
+            validate: (value) => value !== "fasz" || "Nice try!",
+          })}
           type="text"
           name="username_or_email"
           label="Phone, e-mail, or username"
         />
+
         <InputField type="password" name="password" label="Password" />
-        <div className="button">
+        <button className="button" type="submit">
           <span>Log in</span>
-        </div>
+        </button>
+        {errors.username_or_email && errors.username_or_email.message}
       </form>
       <div className="links">
         <a href="#">Forgot password?</a>
         <span>·</span>
-        <a href="#">Sign up for Twatter</a>
+        <a href="/signup">Sign up for Twatter</a>
       </div>
     </LoginStyle>
   );
