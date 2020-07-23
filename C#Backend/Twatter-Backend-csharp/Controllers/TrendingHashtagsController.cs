@@ -30,10 +30,6 @@ namespace Twatter_Backend_csharp.Controllers
             return Ok();
         }
 
-        //
-        // Needs unit tests !
-        //
-
         [HttpGet]
         public async Task<IActionResult> TrendingHashtags([FromQuery]string date)
         {
@@ -42,18 +38,20 @@ namespace Twatter_Backend_csharp.Controllers
                 return BadRequest(ControllerResponse.InvalidModelState.ToString());
             }
 
-            var Provider = CultureInfo.InvariantCulture;
-            var Format = "MM/dd/yyyy HH:mm:ss.ffffff";
-            DateTime TimeFilter;
+            if(date == null)
+            {
+                return BadRequest(ControllerResponse.InvalidDateFormat.ToString());
+            }
 
+            DateTime TimeFilter;
             try
             {
-                TimeFilter = DateTime.ParseExact(date,Format,Provider);
+                TimeFilter = Convert.ToDateTime(date);
             }
             catch(FormatException ex)
             {
                 Console.WriteLine(ex.Message);
-                return BadRequest(ControllerResponse.InvalidTimeFilter.ToString());
+                return BadRequest(ControllerResponse.InvalidDateFormat.ToString());
             }
             
             var FilteredHashtags = await _repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(TimeFilter);

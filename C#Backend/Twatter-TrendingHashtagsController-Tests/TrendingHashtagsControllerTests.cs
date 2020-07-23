@@ -129,5 +129,68 @@ namespace Twatter_TrendingHashtagsController_Tests
             Assert.Equal(new { hashtag = "covid", count = 13 }, HashtagList.TrendingHashtags[0]);
             Assert.Equal(TimeInterval, HashtagList.TimeFilter);
         }
+
+        [Fact]
+        public async void TrendingHashtags_CalledWithNull_Returns_BadRequestObjectResult_With_InvalidDateFormat()
+        {
+            var ExpetedInvalidDateFormatString = ControllerResponse.InvalidDateFormat.ToString();
+
+            var result = await controller.TrendingHashtags(null);
+            var BadRequesrObjectResult = Assert.IsType<BadRequestObjectResult>(result);
+            var InvalidDateFormatString = Assert.IsType<string>(BadRequesrObjectResult.Value);
+
+            Assert.Equal(ExpetedInvalidDateFormatString, InvalidDateFormatString);
+        }
+
+        [Fact]
+        public async void TrendingHashtags_CalledWithInvalidDate_Returns_BadRequestObjectResult_With_InvalidDateFormat()
+        {
+            var ExpetedInvalidDateFormatString = ControllerResponse.InvalidDateFormat.ToString();
+            var InvalidDate = "07/21/2020 16:00:00 AM";
+
+            var result = await controller.TrendingHashtags(InvalidDate);
+            var BadRequesrObjectResult = Assert.IsType<BadRequestObjectResult>(result);
+            var InvalidDateFormatString = Assert.IsType<string>(BadRequesrObjectResult.Value);
+
+            Assert.Equal(ExpetedInvalidDateFormatString, InvalidDateFormatString);
+        }
+        [Fact]
+        public async void TrendingHastags_CalledWithValidDate_Returns_NotFoundObjectResult_With_FilteredHashtagsNotFound_When_RepositoryReturnNull()
+        {
+            var ValidDate = "07/21/2020 12:00:00 AM";
+            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate);
+            var ExpectedFilteredHashtagsNotFoundString = ControllerResponse.FilteredHashtagsNotFound.ToString();
+
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
+
+            var result = await controller.TrendingHashtags(ValidDate);
+            var NotFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
+            var FilteredHashtagsNotFoundString = Assert.IsType<string>(NotFoundObjectResult.Value);
+
+            Assert.Equal(ExpectedFilteredHashtagsNotFoundString, FilteredHashtagsNotFoundString);
+        }
+
+        [Fact]
+        public async void TrendingHashtags_CalledWithValidDate_Returns_OkObjectResult_With_ListOfHashtags()
+        {
+            var ValidDate = "07/21/2020 12:00:00 AM";
+            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate);
+
+            object[] dbData = { new { hashtag = "covid", count = 13 },
+                new { hashtag = "summer", count = 8 },
+                new { hashtag = "quarantine", count = 4 }
+            };
+
+            var list = new HashtagList { TimeFilter = ValidDateDateTimeFormat, TrendingHashtags = dbData };
+
+            repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).Returns(list);
+
+            var result = await controller.TrendingHashtags(ValidDate);
+            var OkObjectResult = Assert.IsType<OkObjectResult>(result);
+            var HashtagList = Assert.IsType<HashtagList>(OkObjectResult.Value);
+
+            Assert.Equal(new { hashtag = "summer", count = 8 }, HashtagList.TrendingHashtags[1]);
+            Assert.Equal(ValidDateDateTimeFormat, HashtagList.TimeFilter);
+        }
     }
 }
