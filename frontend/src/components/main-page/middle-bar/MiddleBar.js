@@ -18,8 +18,7 @@ const MiddleBarStyle = styled.div`
         justify-content: space-between;
         padding-left: 15px;
         padding-right: 15px;
-        width: 100%;
-        max-width: 660px;
+        width: 50%;
         height: 53px;
         border-bottom: 1px solid rgb(56, 68, 77);
         
