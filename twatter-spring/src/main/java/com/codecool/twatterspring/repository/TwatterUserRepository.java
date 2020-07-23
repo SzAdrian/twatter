@@ -1,14 +1,16 @@
 package com.codecool.twatterspring.repository;
 
 import com.codecool.twatterspring.model.TwatterUser;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
 
-public interface TwatterUserRepository extends JpaRepository<TwatterUser, Long> {
+public interface TwatterUserRepository extends CrudRepository<TwatterUser, Long> {
+    Optional<TwatterUser> findByName(String username);
 
     @Query("SELECT u.name FROM TwatterUser u WHERE u.id = :userId")
     String getUsernameByUserId(@Param("userId") Long userId);
