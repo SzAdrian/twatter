@@ -5,20 +5,26 @@ import NewTweet from "../Tweet/NewTweet";
 const MiddleBarStyle = styled.div`
     
     grid-area: middleBar;
+    display: flex;
+    flex-direction: column;
     position: relative;
+    border-style: solid;
+    width: 100%;
+    border-width: 0 1.5px;
+    border-color: rgb(37, 51, 65);
 
     .home-bar {
-        position: fixed;
+        position: sticky;
+        top: 0;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
         padding-left: 15px;
         padding-right: 15px;
-        width: 100%;
-        max-width: 660px;
+        width: inherit;
         height: 53px;
-        border-bottom: 1px solid rgb(56, 68, 77);;
+        border-bottom: 1px solid rgb(56, 68, 77);
         
     }
     
@@ -35,13 +41,13 @@ const MiddleBarStyle = styled.div`
 
     .middle-bar-container {
         position: relative;
-        top: 53px;
+        top: 54px;
     }
     
     .csiik {
-        width: 660px;
+        width: 100%;
         height: 10px;
-        background-color: rgb(37, 51, 65);
+        background-color: rgb(56, 68, 77);
     }
 
 `
