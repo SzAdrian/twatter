@@ -19,9 +19,18 @@ namespace Twatter_Backend_csharp.Repositories
 
             _hashtags = hashtags;
         }
-        public void Add(Hashtag entity)
+        public Task<bool> Add(Hashtag entity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _hashtags.Add(entity);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+
+            return Task.FromResult(true);
         }
 
         public void AddRange(IEnumerable<Hashtag> entities)

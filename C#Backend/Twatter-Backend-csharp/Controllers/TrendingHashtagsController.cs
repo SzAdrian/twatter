@@ -25,9 +25,19 @@ namespace Twatter_Backend_csharp.Controllers
         [HttpPost("AddHashtag")]
         public async Task<IActionResult> AddHashtag([FromBody] Hashtag hashtag)
         {
-            //TODO !
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ControllerResponse.InvalidModelState.ToString());
+            }
 
-            return Ok();
+            hashtag.Date = DateTime.Now;
+            var result = await _repository.HashtagRepository.Add(hashtag);
+
+            if (!result) return StatusCode(500, ControllerResponse.AddingHashtagFailed.ToString());
+
+            await _repository.Complete();
+
+            return Ok(ControllerResponse.AddingHashtagSuccesfull.ToString()); 
         }
 
         [HttpGet]
