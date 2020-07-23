@@ -19,7 +19,8 @@ const SidebarFooterStyle = styled.div`
     a {
         text-decoration: none;
         color: rgb(136, 153, 166);
-        margin: 0 5px
+        margin: 0 5px;
+        outline: none;
 
     }
     
@@ -41,6 +42,7 @@ const SidebarFooterStyle = styled.div`
         border: none;
         height: 19px;
         color: rgb(136, 153, 166);
+        outline: none;
     }
     
     .more-button button:hover {

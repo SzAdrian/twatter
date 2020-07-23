@@ -10,8 +10,9 @@ const LeftBottomPanelStyle = styled.div`
   justify-content: space-evenly;
   border-radius: 28px;
   height: 50px;
-  display: flex;
+  cursor: pointer;
   align-items: center;
+  transition: background-color .24s ease;
 
   :hover {
     background-color: rgba(29, 161, 242, 0.1);

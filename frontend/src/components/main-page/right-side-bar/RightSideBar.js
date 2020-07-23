@@ -8,11 +8,12 @@ import SidebarFooter from "./SidebarFooter";
 const RightSideBarStyle = styled.div`
 
     grid-area: rightBar;
-    margin-left: 20px;
+    margin-left: 30px;
     
     @media screen and (max-width: 1000px) {
         display: none;
     }
+    
 
 `
 

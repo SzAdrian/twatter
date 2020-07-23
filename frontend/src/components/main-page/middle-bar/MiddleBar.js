@@ -6,6 +6,9 @@ const MiddleBarStyle = styled.div`
     
     grid-area: middleBar;
     position: relative;
+    border-style: solid;
+    border-width: 0 1.5px;
+    border-color: rgb(37, 51, 65);
 
     .home-bar {
         position: fixed;
@@ -39,9 +42,9 @@ const MiddleBarStyle = styled.div`
     }
     
     .csiik {
-        width: 660px;
+        width: 100%;
         height: 10px;
-        background-color: rgb(37, 51, 65);
+        background-color: rgb(56, 68, 77);
     }
 
 `

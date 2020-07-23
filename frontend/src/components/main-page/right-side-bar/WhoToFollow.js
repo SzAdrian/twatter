@@ -76,6 +76,7 @@ const WhoToFollowStyle = styled.div`
         font-family: Arial,serif;
         transition: background-color .24s ease;
         cursor: pointer;
+        outline: none;
     }
     
     .follow-button:hover {

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LeftSideBar from "./Left-side-bar/LeftSideBar";
 import MiddleBar from "./middle-bar/MiddleBar";
 import RightSideBar from "./right-side-bar/RightSideBar";
+import MediaQuery from "react-responsive";
 
 const MainPageStyle = styled.div`
 
@@ -35,6 +36,7 @@ function MainPage() {
             <LeftSideBar />
             <MiddleBar />
             <RightSideBar />
+
         </MainPageStyle>
     )
 

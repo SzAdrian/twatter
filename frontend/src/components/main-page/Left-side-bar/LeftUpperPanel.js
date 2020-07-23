@@ -23,13 +23,14 @@ const MenuStyle = styled.div`
   font-size: 1.8rem;
   margin: 15px;
   display: flex;
+  cursor: pointer;
   align-items: center;
   fill: white;
   :hover {
     background-color: rgba(29, 161, 242, 0.1);
     fill: rgb(29, 161, 242);
     color: rgb(29, 161, 242);
-    transition: 0.5s;
+    transition: 0.24s;
   }
 `;
 
@@ -38,13 +39,14 @@ const TweetButtonStyle = styled.div`
   color: white;
   font-size: 1.8rem;
   display: flex;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   background-color: rgb(29, 161, 242);
   border-radius: 28px;
   :hover {
     background-color: rgb(50, 130, 242);
-    transition: 0.5s;
+    transition: 0.24s;
   }
 `;
 
