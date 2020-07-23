@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import TwatterLogo from "components/shared/TwatterLogo";
 
 const LeftUpperPanelStyle = styled.div`
   grid-area: leftBar;
@@ -53,7 +54,9 @@ const TweetButtonStyle = styled.div`
 export default function LeftUpperPanel() {
   return (
     <LeftUpperPanelStyle>
-      <div>Logo helye</div>
+      <MenuStyle>
+        <TwatterLogo width="28px" heigth="28px" />
+      </MenuStyle>
       <MenuStyle>
         <svg viewBox="0 0 24 24">
           <g>
