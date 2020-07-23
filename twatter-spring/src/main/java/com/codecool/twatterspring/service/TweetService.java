@@ -1,5 +1,6 @@
 package com.codecool.twatterspring.service;
 
+import com.codecool.twatterspring.model.TwatterUser;
 import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
 import com.codecool.twatterspring.model.dto.OutgoingTweetDTO;
@@ -7,9 +8,11 @@ import com.codecool.twatterspring.model.dto.TimelineTweetDTO;
 import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,5 +47,24 @@ public class TweetService {
                                            .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
                                            .build())
                          .collect(Collectors.toList());
+    }
+
+    public List<TimelineTweetDTO> provideTweetsForHomeTimelineBy(Long userId, Pageable pageable) {
+        List<Long> followeeIds = users.getFolloweesByUserId(userId)
+                                      .stream()
+                                      .map(TwatterUser::getId)
+                                      .collect(Collectors.toList());
+        List<Tweet> followeeTweets = tweets.findLimitedNumberOfTweetsByFolloweeIds(followeeIds, pageable);
+
+        return followeeTweets.stream()
+                             .map(tweet -> TimelineTweetDTO.builder()
+                                                .id(tweet.getId())
+                                                .content(tweet.getContent())
+                                                .userId(tweet.getUserId())
+                                                .userName(users.getUsernameByUserId(tweet.getUserId()))
+                                                .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
+                                                .build()
+                             )
+                             .collect(Collectors.toList());
     }
 }
