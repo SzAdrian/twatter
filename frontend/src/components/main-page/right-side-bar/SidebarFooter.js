@@ -11,10 +11,10 @@ const SidebarFooterStyle = styled.div`
     height: 50px;
     display: flex;
     flex-direction: row;
-    font-size: 1.3rem;
+    font-size: 13px;
     justify-content: start;
     flex-wrap: wrap;
-    padding: 0 15px;
+    padding: 0 7px;
     
     a {
         text-decoration: none;
