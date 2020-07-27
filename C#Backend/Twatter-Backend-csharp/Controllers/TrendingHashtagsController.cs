@@ -14,13 +14,14 @@ namespace Twatter_Backend_csharp.Controllers
     [ApiController]
     public class TrendingHashtagsController : Controller
     {
-
         private readonly IUnitOfWork _repository;
 
         public TrendingHashtagsController(IUnitOfWork repository)
         {
             _repository = repository;
         }
+
+        // Needs documentation !
 
         [HttpPost("AddHashtag")]
         public async Task<IActionResult> AddHashtag([FromBody] Hashtag hashtag)
@@ -44,6 +45,15 @@ namespace Twatter_Backend_csharp.Controllers
 
             return Ok(ControllerResponse.AddingHashtagSuccesfull.ToString()); 
         }
+
+        // Needs documentation !
+
+        //TrendingHashtags:
+        //  -This method returns the top 20 trending hashtags filtered by a specified date.
+        //
+        //Params: 
+        //  - string Date : The specified Date in string fromat for filtering hashtags.
+        //
 
         [HttpGet]
         public async Task<IActionResult> TrendingHashtags([FromQuery]string date)
@@ -79,6 +89,8 @@ namespace Twatter_Backend_csharp.Controllers
             return Ok(FilteredHashtags);
         }
 
+        // Needs documentation !
+
         [HttpGet("Daily")]
         public async Task<IActionResult> DailyTrendingHashtags()
         {
@@ -98,6 +110,8 @@ namespace Twatter_Backend_csharp.Controllers
             return Ok(DailyTrendingHashtags);
         }
 
+        // Needs documentation !
+
         [HttpGet("Weekly")]
         public async Task<IActionResult> WeeklyTrendingHashtags()
         {
@@ -116,6 +130,8 @@ namespace Twatter_Backend_csharp.Controllers
 
             return Ok(WeeklyTrendingHashtags);
         }
+
+        // Needs documentation !
 
         [HttpGet("Monthly")]
         public async Task<IActionResult> MonthlyTrendingHashtags()
