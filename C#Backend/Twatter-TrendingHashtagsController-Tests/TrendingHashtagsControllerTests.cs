@@ -158,7 +158,6 @@ namespace Twatter_TrendingHashtagsController_Tests
         public async void TrendingHastags_CalledWithValidDate_Returns_NotFoundObjectResult_With_FilteredHashtagsNotFound_When_RepositoryReturnNull()
         {
             var ValidDate = "07/21/2020 12:00:00 AM";
-            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate);
             var ExpectedFilteredHashtagsNotFoundString = ControllerResponse.FilteredHashtagsNotFound.ToString();
 
             repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();

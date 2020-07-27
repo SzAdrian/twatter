@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateProgramFile>false</GenerateProgramFile>
     <RootNamespace>Twatter_TrendingHashtagsController_Tests</RootNamespace>
   </PropertyGroup>
 

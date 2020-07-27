@@ -52,6 +52,10 @@
               "target": "Package",
               "version": "[3.1.6, )"
             },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.6.1, )"
+            },
             "NSubstitute": {
               "target": "Package",
               "version": "[4.2.2, )"
