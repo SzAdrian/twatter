@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Twatter_Backend_csharp.Controllers.Responses;
 using System.Collections.Generic;
 using Twatter_Backend_csharp.Models;
+using System.Globalization;
 
 namespace Twatter_TrendingHashtagsController_Tests
 {
@@ -158,7 +159,6 @@ namespace Twatter_TrendingHashtagsController_Tests
         public async void TrendingHastags_CalledWithValidDate_Returns_NotFoundObjectResult_With_FilteredHashtagsNotFound_When_RepositoryReturnNull()
         {
             var ValidDate = "07/21/2020 12:00:00 AM";
-            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate);
             var ExpectedFilteredHashtagsNotFoundString = ControllerResponse.FilteredHashtagsNotFound.ToString();
 
             repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
@@ -174,7 +174,7 @@ namespace Twatter_TrendingHashtagsController_Tests
         public async void TrendingHashtags_CalledWithValidDate_Returns_OkObjectResult_With_ListOfHashtags()
         {
             var ValidDate = "07/21/2020 12:00:00 AM";
-            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate);
+            var ValidDateDateTimeFormat = Convert.ToDateTime(ValidDate, CultureInfo.InvariantCulture);
 
             object[] dbData = { new { hashtag = "covid", count = 13 },
                 new { hashtag = "summer", count = 8 },

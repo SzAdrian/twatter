@@ -71,7 +71,7 @@ namespace Twatter_Backend_csharp.Controllers
             DateTime TimeFilter;
             try
             {
-                TimeFilter = Convert.ToDateTime(date);
+                TimeFilter = Convert.ToDateTime(date, CultureInfo.InvariantCulture);
             }
             catch(FormatException ex)
             {
