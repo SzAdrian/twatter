@@ -23,7 +23,6 @@ public class Tweet {
     @GeneratedValue
     private Long id;
 
-    @NaturalId
     private Long userId;
 
     private String content;
