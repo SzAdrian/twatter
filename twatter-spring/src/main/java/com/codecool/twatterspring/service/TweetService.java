@@ -8,7 +8,6 @@ import com.codecool.twatterspring.model.dto.TimelineTweetDTO;
 import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
