@@ -9,6 +9,7 @@ import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 @RequiredArgsConstructor
 public class TweetService {
 
@@ -63,8 +65,7 @@ public class TweetService {
                                                 .userId(tweet.getUserId())
                                                 .userName(users.getUsernameByUserId(tweet.getUserId()))
                                                 .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                                                .build()
-                             )
+                                                .build())
                              .collect(Collectors.toList());
     }
 }
