@@ -89,6 +89,13 @@ class TwatterUserRepositoryTest {
     }
 
 
+    @Test
+    @Order(4)
+    public void testUserHasTwoFollowees() {
+        assertThat(users.getFolloweesByUserId(15L)).hasSize(2);
+    }
+
+
 
 
 
