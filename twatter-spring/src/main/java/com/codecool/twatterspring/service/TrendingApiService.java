@@ -1,6 +1,7 @@
 package com.codecool.twatterspring.service;
 
 import com.codecool.twatterspring.model.Tweet;
+import com.codecool.twatterspring.model.dto.TrendingHashtagsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +31,13 @@ public class TrendingApiService {
                 Void.class
         );
         return response.getStatusCode();
+    }
+
+    public TrendingHashtagsDTO getTradingHashtagsByTimeInterval(String interval) {
+        ResponseEntity<TrendingHashtagsDTO> response = template.getForEntity(
+                BASE_URL+ "/" + interval,
+                TrendingHashtagsDTO.class
+        );
+        return response.getBody();
     }
 }
