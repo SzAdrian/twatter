@@ -2,6 +2,7 @@ package com.codecool.twatterspring.security.config;
 
 
 import com.codecool.twatterspring.security.JwtFilter;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,10 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
         "/webjars/**"
     };
 
+    public BaseSecurityConfig() {
+        this.jwtFilter = null;
+    }
+    
     public BaseSecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;
     }
