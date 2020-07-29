@@ -32,7 +32,7 @@ public class TwatterUser {
     @Column(nullable = false)
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     private List<TwatterUser> followees;
 
 
