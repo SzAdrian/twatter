@@ -23,7 +23,7 @@ public class TweetService {
     private final TwatterUserRepository users;
     private final TrendingApiService trending;
 
-    public OutgoingTweetDTO saveNewTweet(IncomingTweetDTO dto) {
+    public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
         Tweet tweet = Tweet.builder()
                            .userId(dto.getUserId())
                            .content(dto.getContent())

@@ -7,18 +7,15 @@ import com.codecool.twatterspring.security.service.JwtService;
 import com.codecool.twatterspring.service.TweetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -54,7 +51,7 @@ class TweetControllerTest {
             .id(1L)
             .postedAt(LocalDateTime.now().toString())
             .build();
-        when(tweetService.saveNewTweet(incoming)).thenReturn(outgoing);
+        when(tweetService.handleNewTweet(incoming)).thenReturn(outgoing);
         
         mockMvc
             .perform(post(urlPrefix)

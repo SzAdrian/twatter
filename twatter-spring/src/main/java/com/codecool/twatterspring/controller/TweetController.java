@@ -19,6 +19,6 @@ public class TweetController {
 
     @PostMapping
     public ResponseEntity<OutgoingTweetDTO> add(@RequestBody IncomingTweetDTO dto) {
-        return ResponseEntity.ok(tweetService.saveNewTweet(dto));
+        return ResponseEntity.ok(tweetService.handleNewTweet(dto));
     }
 }
