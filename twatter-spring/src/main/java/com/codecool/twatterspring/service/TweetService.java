@@ -43,7 +43,7 @@ public class TweetService {
                                            .id(tweet.getId())
                                            .content(tweet.getContent())
                                            .userId(tweet.getUserId())
-                                           .userName(users.getUsernameByUserId(tweet.getUserId()))
+                                           .username(users.getUsernameByUserId(tweet.getUserId()))
                                            .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
                                            .build())
                          .collect(Collectors.toList());
@@ -61,7 +61,7 @@ public class TweetService {
                                                 .id(tweet.getId())
                                                 .content(tweet.getContent())
                                                 .userId(tweet.getUserId())
-                                                .userName(users.getUsernameByUserId(tweet.getUserId()))
+                                                .username(users.getUsernameByUserId(tweet.getUserId()))
                                                 .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
                                                 .build())
                              .collect(Collectors.toList());
