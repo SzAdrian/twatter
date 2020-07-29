@@ -1,5 +1,7 @@
 package com.codecool.twatterspring.controller;
 
+import com.codecool.twatterspring.model.dto.TwatterUserProfileDTO;
+import com.codecool.twatterspring.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/users")
 public class UserController {
 
+    private UserService userService;
+
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getProfile(@PathVariable Long userId) {
-        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    public ResponseEntity<TwatterUserProfileDTO> getProfile(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.getUserProfileBy(userId));
     }
 
     @PostMapping("/{userId}/followees")
