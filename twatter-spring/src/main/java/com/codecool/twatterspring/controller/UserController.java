@@ -17,4 +17,9 @@ public class UserController {
     public ResponseEntity<?> followUser(@RequestBody Long followeeId, @PathVariable Long userId) {
         return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
     }
+
+    @DeleteMapping("/{userId}/followees/{followeeId}")
+    public ResponseEntity<?> unfollowUser(@PathVariable Long userId, @PathVariable Long followeeId) {
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+    }
 }
