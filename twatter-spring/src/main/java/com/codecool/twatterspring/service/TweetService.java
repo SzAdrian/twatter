@@ -21,6 +21,7 @@ public class TweetService {
 
     private final TweetRepository tweets;
     private final TwatterUserRepository users;
+    private final TrendingApiService trending;
 
     public OutgoingTweetDTO saveNewTweet(IncomingTweetDTO dto) {
         Tweet tweet = Tweet.builder()
@@ -30,6 +31,7 @@ public class TweetService {
                            .build();
 
         tweet = tweets.save(tweet);
+        trending.postNewTweet(tweet);
 
         return OutgoingTweetDTO.builder()
                                .id(tweet.getId())
