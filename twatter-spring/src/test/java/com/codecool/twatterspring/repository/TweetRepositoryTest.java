@@ -2,10 +2,12 @@ package com.codecool.twatterspring.repository;
 
 import com.codecool.twatterspring.model.TwatterUser;
 import com.codecool.twatterspring.model.Tweet;
+import com.codecool.twatterspring.redis.TimelineRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
@@ -22,6 +24,9 @@ public class TweetRepositoryTest {
 
     @Autowired
     private TwatterUserRepository users;
+
+    @MockBean
+    private TimelineRepository timelineRepository;
 
     @BeforeEach
     public void init() {
