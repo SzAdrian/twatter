@@ -91,7 +91,7 @@ namespace Twatter_Backend_csharp.Controllers
 
         // Needs documentation !
 
-        [HttpGet("Daily")]
+        [HttpGet("daily")]
         public async Task<IActionResult> DailyTrendingHashtags()
         {
             if (!ModelState.IsValid)
@@ -112,7 +112,7 @@ namespace Twatter_Backend_csharp.Controllers
 
         // Needs documentation !
 
-        [HttpGet("Weekly")]
+        [HttpGet("weekly")]
         public async Task<IActionResult> WeeklyTrendingHashtags()
         {
             if (!ModelState.IsValid)
@@ -133,7 +133,7 @@ namespace Twatter_Backend_csharp.Controllers
 
         // Needs documentation !
 
-        [HttpGet("Monthly")]
+        [HttpGet("monthly")]
         public async Task<IActionResult> MonthlyTrendingHashtags()
         {
             if (!ModelState.IsValid)
