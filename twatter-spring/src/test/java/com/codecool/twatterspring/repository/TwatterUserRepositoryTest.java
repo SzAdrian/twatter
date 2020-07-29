@@ -2,8 +2,7 @@ package com.codecool.twatterspring.repository;
 
 import com.codecool.twatterspring.model.TwatterUser;
 import com.codecool.twatterspring.redis.TimelineRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -17,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class TwatterUserRepositoryTest {
 
 
@@ -67,19 +67,26 @@ class TwatterUserRepositoryTest {
 
     }
 
+
     @Test
+    @Order(1)
     public void initTest() {
         assertThat(users).isNotNull();
         assertThat(users.findAll()).hasSize(4);
     }
 
     @Test
+    @Order(2)
     public void testFindByName() {
         TwatterUser user = users.findByName("elon").orElse(new TwatterUser());
-        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getId()).isEqualTo(5L);
     }
 
-
+    @Test
+    @Order(3)
+    public void testGetUsernameByUserId() {
+        assertThat(users.getUsernameByUserId(9L)).isEqualTo("elon");
+    }
 
 
 
