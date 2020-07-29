@@ -3,8 +3,7 @@ package com.codecool.twatterspring.service;
 import com.codecool.twatterspring.model.TwatterUser;
 import com.codecool.twatterspring.redis.TimelineRepository;
 import com.codecool.twatterspring.repository.TwatterUserRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ActiveProfiles("test")
 @Import(UserService.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserServiceIntegrationTest {
 
     @Autowired
@@ -74,10 +74,20 @@ class UserServiceIntegrationTest {
 
     }
 
+    @Order(1)
     @Test
     public void testFollowUser() {
         userService.followUser(3L, 4L);
         assertThat(users.getFolloweesByUserId(3L)).hasSize(3);
+    }
+
+    @Order(2)
+    @Test
+    public void testUnfollowUser() {
+        userService.followUser(7L, 8L);
+        userService.unfollowUser(7L, 8L);
+        assertThat(users.getFolloweesByUserId(7L)).hasSize(2);
+
     }
 
 
