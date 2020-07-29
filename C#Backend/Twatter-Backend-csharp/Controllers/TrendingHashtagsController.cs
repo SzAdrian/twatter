@@ -10,7 +10,7 @@ using Twatter_Backend_csharp.Units.Interface;
 
 namespace Twatter_Backend_csharp.Controllers
 {
-    [Route("TrendingHashtags")]
+    [Route("trending")]
     [ApiController]
     public class TrendingHashtagsController : Controller
     {
