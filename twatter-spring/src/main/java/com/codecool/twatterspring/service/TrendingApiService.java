@@ -19,4 +19,16 @@ public class TrendingApiService {
     public TrendingApiService(RestTemplateBuilder builder) {
         this.template = builder.build();
     }
+
+    public HttpStatus postNewTweet(Tweet tweet) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Tweet> request = new HttpEntity<>(tweet, headers);
+        ResponseEntity<?> response = template.postForEntity(
+                BASE_URL,
+                request,
+                Void.class
+        );
+        return response.getStatusCode();
+    }
 }
