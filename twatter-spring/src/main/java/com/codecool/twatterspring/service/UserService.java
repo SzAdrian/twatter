@@ -34,4 +34,15 @@ public class UserService {
 
         users.save(user);
     }
+
+    @Transactional
+    public void unfollowUser(Long userId, Long followeeId) {
+        TwatterUser user = users.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("The given userId does not exist!"));
+
+        user.getFollowees().removeIf((followee) -> followee.getId().equals(followeeId));
+        users.save(user);
+
+
+    }
 }
