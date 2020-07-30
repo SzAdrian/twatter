@@ -23,6 +23,31 @@ namespace Twatter_Backend_csharp.Controllers
 
         // Needs documentation !
 
+        [HttpPost]
+        public async Task<IActionResult> AddHashtagsFromTweet([FromBody] Tweet tweet)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ControllerResponse.InvalidModelState.ToString());
+            }
+
+            if (tweet == null)
+            {
+                return BadRequest(ControllerResponse.HashtagCannotBeNull.ToString());
+            }
+
+            
+            var hashtags =  _repository.HashtagRepository.GetHashtagsFromTweet(tweet);
+
+            var result = await _repository.HashtagRepository.AddRange(hashtags);
+
+            if (!result) return StatusCode(500, ControllerResponse.AddingHashtagFailed.ToString());
+
+            await _repository.Complete();
+
+            return Ok(ControllerResponse.AddingHashtagSuccesfull.ToString());
+        }
+
         [HttpPost("AddHashtag")]
         public async Task<IActionResult> AddHashtag([FromBody] Hashtag hashtag)
         {

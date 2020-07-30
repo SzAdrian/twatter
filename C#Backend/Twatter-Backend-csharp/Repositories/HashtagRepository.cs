@@ -8,6 +8,9 @@ using Twatter_Backend_csharp.Context;
 using Twatter_Backend_csharp.Models;
 using Microsoft.EntityFrameworkCore;
 using Twatter_Backend_csharp.Repositories.Interface;
+using System.Text;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace Twatter_Backend_csharp.Repositories
 {
@@ -19,6 +22,32 @@ namespace Twatter_Backend_csharp.Repositories
 
             _hashtags = hashtags;
         }
+
+        public IList<Hashtag> GetHashtagsFromTweet(Tweet tweet)
+        {
+            IList<Hashtag> hashtags = new List<Hashtag>();
+
+            bool hashtagFound = false;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < tweet.Content.Length; i++ )
+            {
+                if (new Regex(@"#").IsMatch(tweet.Content[i].ToString())) hashtagFound = true;
+                else if (hashtagFound == false) continue;
+                else if (hashtagFound == true && new Regex(@"^\w+$").IsMatch(tweet.Content[i].ToString())) sb.Append(tweet.Content[i].ToString());
+                else
+                {
+                    hashtagFound = false;
+                    Hashtag newHashtag = new Hashtag();
+                    newHashtag.Name = sb.ToString();
+                    newHashtag.Date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture);
+                    hashtags.Add(newHashtag);
+                    sb.Clear();
+                }
+            }
+                   
+            return hashtags;
+        }
+
         public Task<bool> Add(Hashtag entity)
         {
             try
@@ -33,9 +62,18 @@ namespace Twatter_Backend_csharp.Repositories
             return Task.FromResult(true);
         }
 
-        public void AddRange(IEnumerable<Hashtag> entities)
+        public Task<bool> AddRange(IEnumerable<Hashtag> entities)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _hashtags.AddRange(entities);
+            }
+            catch (Exception)
+            {
+                return Task.FromResult(false);
+            }
+
+            return Task.FromResult(true);
         }
 
         public Task<IEnumerable<Hashtag>> Find(Expression<Func<Hashtag, bool>> expression)

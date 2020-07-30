@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Threading;
 
 namespace Twatter_Backend_csharp.Models
 {
     public class Hashtag
     {
+
         public int Id { get; set; }
         [Required]
         [RegularExpression(@"^\w+$", ErrorMessage = "Hashtag cannot contain special or break characters.")]
@@ -12,5 +14,6 @@ namespace Twatter_Backend_csharp.Models
         
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
+
     }
 }
