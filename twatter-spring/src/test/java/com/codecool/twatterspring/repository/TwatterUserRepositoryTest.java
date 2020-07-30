@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
@@ -17,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class TwatterUserRepositoryTest {
-
 
     @Autowired
     private TwatterUserRepository users;
@@ -28,7 +29,8 @@ class TwatterUserRepositoryTest {
 
     @BeforeEach
     public void init() {
-        TwatterUser user1 = users.save(TwatterUser.builder()
+        
+        TwatterUser elon = users.save(TwatterUser.builder()
                 .name("elon")
                 .password("password")
                 .registrationDate(LocalDateTime.now())
@@ -36,7 +38,7 @@ class TwatterUserRepositoryTest {
                 .build()
         );
 
-        TwatterUser user2 = users.save(
+        TwatterUser trumply = users.save(
                 TwatterUser.builder()
                         .name("donald")
                         .password("trumply")
@@ -45,26 +47,25 @@ class TwatterUserRepositoryTest {
                         .build()
         );
 
-        TwatterUser user3 = users.save(
+        TwatterUser gergo = users.save(
                 TwatterUser.builder()
                         .name("gergo")
                         .password("gergo")
                         .registrationDate(LocalDateTime.now())
                         .email("gergo@kovacs.com")
-                        .followees(List.of(user1, user2))
+                        .followees(List.of(elon, trumply))
                         .build()
         );
 
-        TwatterUser user4 = users.save(
+        TwatterUser elek = users.save(
                 TwatterUser.builder()
                         .name("teszt")
                         .password("teszt")
                         .registrationDate(LocalDateTime.now())
                         .email("teszt@elek.com")
-                        .followees(List.of(user1, user3))
+                        .followees(List.of(elon, gergo))
                         .build()
         );
-
     }
 
 
@@ -79,20 +80,20 @@ class TwatterUserRepositoryTest {
     @Order(2)
     public void testFindByName() {
         TwatterUser user = users.findByName("elon").orElse(new TwatterUser());
-        assertThat(user.getId()).isEqualTo(5L);
+        assertThat(user.getId()).isEqualTo(1L);
     }
 
     @Test
     @Order(3)
     public void testGetUsernameByUserId() {
-        assertThat(users.getUsernameByUserId(9L)).isEqualTo("elon");
+        assertThat(users.getUsernameByUserId(1L)).isEqualTo("elon");
     }
 
 
     @Test
     @Order(4)
     public void testUserHasTwoFollowees() {
-        assertThat(users.getFolloweesByUserId(15L)).hasSize(2);
+        assertThat(users.getFolloweesByUserId(3L)).hasSize(2);
     }
 
 
