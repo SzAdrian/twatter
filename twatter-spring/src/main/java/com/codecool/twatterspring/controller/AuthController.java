@@ -36,7 +36,7 @@ public class AuthController {
         authService.logout(response);
     }
     
-    @PostMapping("registration")
+    @PostMapping("register")
     public boolean register(AuthDTO registrationDTO) {
         log.info("Registration request received: " + registrationDTO.toString());
         return authService.tryRegister(registrationDTO);
