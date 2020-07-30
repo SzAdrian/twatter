@@ -40,6 +40,7 @@ namespace Twatter_Backend_csharp.Repositories
                     Hashtag newHashtag = new Hashtag();
                     newHashtag.Name = sb.ToString();
                     newHashtag.Date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture);
+                    newHashtag.TweetId = tweet.Id;
                     hashtags.Add(newHashtag);
                     sb.Clear();
                 }
@@ -74,6 +75,23 @@ namespace Twatter_Backend_csharp.Repositories
             }
 
             return Task.FromResult(true);
+        }
+
+        public async Task<List<string>> GetTweetIds(string hashtag)
+        {
+
+            var hashtagList = await _hashtags
+                .Select(h => h)
+                .Where(h => h.Name.Equals(hashtag))
+                .OrderByDescending(h => h.Date)
+                .Take(30)
+                .ToListAsync();
+
+            var tweetIds = hashtagList
+                .Select(hashtag => hashtag.TweetId)
+                .ToList();
+
+            return tweetIds;
         }
 
         public Task<IEnumerable<Hashtag>> Find(Expression<Func<Hashtag, bool>> expression)
@@ -135,6 +153,7 @@ namespace Twatter_Backend_csharp.Repositories
         {
             throw new NotImplementedException();
         }
+
 
     }
 }

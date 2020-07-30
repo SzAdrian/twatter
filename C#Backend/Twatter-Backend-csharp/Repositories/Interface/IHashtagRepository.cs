@@ -21,7 +21,6 @@ namespace Twatter_Backend_csharp.Repositories.Interface
         void Update(Hashtag entity);
         Task<HashtagList> GetTrendingHashtagsByTimeFilter(DateTime date);
         IList<Hashtag> GetHashtagsFromTweet(Tweet tweet);
-
-
+        Task<List<string>> GetTweetIds(string hashtag);
     }
 }
