@@ -1,0 +1,39 @@
+version: "3"
+services:
+    spring-database:
+        image: "postgres:13-alpine"
+        container_name: spring-database
+        volumes: 
+            - spring-data:/var/lib/postgresql/data/
+        ports: 
+            - 5432:5432
+        environment: 
+            - POSTGRES_DB=twatter
+            - POSTGRES_USER=twatter
+            - POSTGRES_PASSWORD=twatter        
+
+    spring-backend:
+        build: twatter-spring/
+        container_name: spring-backend
+        ports:
+            - "8080"
+        environment: 
+            - TWATTER_POSTGRESQL_DB_PORT=5432
+            - TWATTER_POSTGRESQL_DB_NAME=twatter
+            - TWATTER_POSTGRESQL_DB_USERNAME=twatter
+            - TWATTER_POSTGRESQL_DB_PASSWORD=twatter
+    
+    # dotnet-backend:
+    #     build: C#Backend/
+    #     container_name: dotnet-backend
+    #     ports:
+    #         - "5001"
+    
+    react-frontend:
+        build: frontend/
+        container_name: twatter_frontend
+        ports: 
+            - "3001:3000"
+    
+volumes: 
+    spring-data:
