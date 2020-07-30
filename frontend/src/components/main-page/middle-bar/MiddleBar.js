@@ -27,7 +27,6 @@ const MiddleBarStyle = styled.div`
   }
 
   .home-button {
-    color: white;
     font-size: 2rem;
     font-weight: 800;
   }
