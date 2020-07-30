@@ -8,7 +8,7 @@ import { ThemeProvider } from "styled-components";
 
 function App() {
   return (
-    <ThemeProvider theme={{ mode: "black", secondary: "green" }}>
+    <ThemeProvider theme={{ mode: "dim", secondary: "pink" }}>
       <div className="App">
         <GlobalStyle />
 

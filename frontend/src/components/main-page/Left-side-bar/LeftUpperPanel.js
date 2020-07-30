@@ -27,9 +27,9 @@ const MenuStyle = styled.div`
   cursor: pointer;
   align-items: center;
   :hover {
-    background-color: rgba(29, 161, 242, 0.1);
-    fill: rgb(29, 161, 242);
-    color: rgb(29, 161, 242);
+    background-color: var(--secondaryAlpha);
+    fill: var(--secondary);
+    color: var(--secondary);
     transition: 0.24s;
   }
 `;
@@ -42,7 +42,7 @@ const TweetButtonStyle = styled.div`
   cursor: pointer;
   justify-content: center;
   align-items: center;
-
+  background-color: var(--secondary);
   border-radius: 28px;
   :hover {
     transition: 0.24s;
@@ -122,7 +122,7 @@ export default function LeftUpperPanel() {
         </svg>
         More
       </MenuStyle>
-      <TweetButtonStyle className="secondary-bg">Tweet</TweetButtonStyle>
+      <TweetButtonStyle>Tweet</TweetButtonStyle>
     </LeftUpperPanelStyle>
   );
 }

@@ -28,8 +28,21 @@ const getSecondaryHover = style("secondary", {
   orange: "rgb(244, 93, 34)",
   green: "rgb(21, 172, 89)",
 });
+const getSecondaryTransparent = style("secondary", {
+  blue: "rgba(29,161,242,0.1)",
+  yellow: "rgba(255, 173, 31,0.1)",
+  pink: "rgba(224, 36, 94,0.1)",
+  purple: "rgba(121, 75, 196,0.1)",
+  orange: "rgba(244, 93, 34,0.1)",
+  green: "rgba(21, 172, 89,0.1)",
+});
 
 const GlobalStyle = createGlobalStyle`
+:root {
+  --secondary: ${getSecondary};
+  --secondaryAlpha: ${getSecondaryTransparent}
+}
+
     *, *::before, *::after {
         box-sizing: border-box;
         margin: 0;
