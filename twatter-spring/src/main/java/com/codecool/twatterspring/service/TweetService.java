@@ -33,13 +33,10 @@ public class TweetService {
     public List<TimelineTweetDTO> provideTweetsForUserTimelineBy(Long userId) {
         List<Tweet> userTweets = tweets.findAllByUserId(userId);
         return userTweets.stream()
-                         .map(tweet -> TimelineTweetDTO.builder()
-                                           .id(tweet.getId())
-                                           .content(tweet.getContent())
-                                           .userId(tweet.getUserId())
-                                           .username(users.getUsernameByUserId(tweet.getUserId()))
-                                           .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                                           .build())
+                         .map(tweet -> new TimelineTweetDTO().fromEntity(
+                                 tweet,
+                                 users.getUsernameByUserId(tweet.getUserId()))
+                         )
                          .collect(Collectors.toList());
     }
 
@@ -51,13 +48,10 @@ public class TweetService {
         List<Tweet> followeeTweets = tweets.findLimitedNumberOfTweetsByFolloweeIds(followeeIds);
 
         return followeeTweets.stream()
-                             .map(tweet -> TimelineTweetDTO.builder()
-                                                .id(tweet.getId())
-                                                .content(tweet.getContent())
-                                                .userId(tweet.getUserId())
-                                                .username(users.getUsernameByUserId(tweet.getUserId()))
-                                                .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                                                .build())
+                             .map(tweet -> new TimelineTweetDTO().fromEntity(
+                                     tweet,
+                                     users.getUsernameByUserId(tweet.getUserId()))
+                             )
                              .collect(Collectors.toList());
     }
 }
