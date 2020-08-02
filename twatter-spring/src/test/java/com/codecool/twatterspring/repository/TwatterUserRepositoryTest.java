@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class TwatterUserRepositoryTest {
 
@@ -70,28 +69,24 @@ class TwatterUserRepositoryTest {
 
 
     @Test
-    @Order(1)
     public void initTest() {
         assertThat(users).isNotNull();
         assertThat(users.findAll()).hasSize(4);
     }
 
     @Test
-    @Order(2)
     public void testFindByName() {
         TwatterUser user = users.findByName("elon").orElse(new TwatterUser());
         assertThat(user.getId()).isEqualTo(1L);
     }
 
     @Test
-    @Order(3)
     public void testGetUsernameByUserId() {
         assertThat(users.getUsernameByUserId(1L)).isEqualTo("elon");
     }
 
 
     @Test
-    @Order(4)
     public void testUserHasTwoFollowees() {
         assertThat(users.getFolloweesByUserId(3L)).hasSize(2);
     }
