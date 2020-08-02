@@ -25,15 +25,10 @@ public class TweetService {
     private final TrendingApiService trending;
 
     public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
-        Tweet tweet = new Tweet().fromDTO(dto);
-
-        tweet = tweets.save(tweet);
+        Tweet tweet = tweets.save(new Tweet().fromDTO(dto));
         trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
 
-        return OutgoingTweetDTO.builder()
-                               .id(tweet.getId())
-                               .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                               .build();
+        return new OutgoingTweetDTO().fromEntity(tweet);
     }
     public List<TimelineTweetDTO> provideTweetsForUserTimelineBy(Long userId) {
         List<Tweet> userTweets = tweets.findAllByUserId(userId);
