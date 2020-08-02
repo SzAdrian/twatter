@@ -28,13 +28,7 @@ public class TweetService {
         Tweet tweet = new Tweet().fromDTO(dto);
 
         tweet = tweets.save(tweet);
-        trending.postNewTweet(
-                TrendingTweetDTO.builder()
-                        .id(tweet.getId())
-                        .content(tweet.getContent())
-                        .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                        .build()
-        );
+        trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
 
         return OutgoingTweetDTO.builder()
                                .id(tweet.getId())
