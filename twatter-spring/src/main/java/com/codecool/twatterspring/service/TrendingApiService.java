@@ -4,6 +4,8 @@ import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.TrendingHashtagsDTO;
 import com.codecool.twatterspring.model.dto.TrendingTweetDTO;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +16,14 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class TrendingApiService {
-    private static final String BASE_URL = "?";
+
+    private final String baseUrl;
 
     private final RestTemplate template;
 
-    public TrendingApiService(RestTemplateBuilder builder) {
+    public TrendingApiService(RestTemplateBuilder builder, @Value("$(twatter.trending-api.base-url)") String baseUrl) {
         this.template = builder.build();
+        this.baseUrl = baseUrl;
     }
 
     public HttpStatus postNewTweet(TrendingTweetDTO tweet) {
@@ -27,7 +31,7 @@ public class TrendingApiService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<TrendingTweetDTO> request = new HttpEntity<>(tweet, headers);
         ResponseEntity<?> response = template.postForEntity(
-                BASE_URL,
+                baseUrl,
                 request,
                 Void.class
         );
@@ -36,7 +40,7 @@ public class TrendingApiService {
 
     public TrendingHashtagsDTO getTradingHashtagsByTimeInterval(String interval) {
         ResponseEntity<TrendingHashtagsDTO> response = template.getForEntity(
-                BASE_URL+ "/" + interval,
+                baseUrl+ "/" + interval,
                 TrendingHashtagsDTO.class
         );
         return response.getBody();
