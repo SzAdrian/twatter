@@ -25,11 +25,7 @@ public class TweetService {
     private final TrendingApiService trending;
 
     public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
-        Tweet tweet = Tweet.builder()
-                           .userId(dto.getUserId())
-                           .content(dto.getContent())
-                           .date(LocalDateTime.now())
-                           .build();
+        Tweet tweet = new Tweet().fromDTO(dto);
 
         tweet = tweets.save(tweet);
         trending.postNewTweet(

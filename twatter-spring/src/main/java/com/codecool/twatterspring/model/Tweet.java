@@ -1,5 +1,7 @@
 package com.codecool.twatterspring.model;
 
+import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -26,5 +28,13 @@ public class Tweet {
     @Column(nullable = false)
     @EqualsAndHashCode.Exclude
     private LocalDateTime date;
+
+    public Tweet fromDTO(IncomingTweetDTO dto) {
+        return dto == null ? null : Tweet.builder()
+                .userId(dto.getUserId())
+                .content(dto.getContent())
+                .date(LocalDateTime.now())
+                .build();
+    }
 
 }
