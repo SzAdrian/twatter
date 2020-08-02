@@ -52,4 +52,33 @@ public class TweetServiceTest {
         assertThat(service).isNotNull();
     }
 
+    @Test
+    public void handleNewTweetTest() {
+
+        IncomingTweetDTO incomingTweet1 = IncomingTweetDTO.builder()
+                .content("Test tweet")
+                .userId(1L)
+                .build();
+
+        Tweet tweet1WithoutId = Tweet.builder()
+                .content("Test tweet")
+                .date(LocalDateTime.now())
+                .userId(1L)
+                .build();
+
+        Tweet tweet1WithId = Tweet.builder()
+                .id(1L)
+                .content("Test tweet")
+                .date(tweet1WithoutId.getDate())
+                .userId(1L)
+                .build();
+
+        OutgoingTweetDTO outgoingTweetDTO = OutgoingTweetDTO.builder()
+                .id(1L)
+                .postedAt(Long.toString(tweet1WithId.getDate().toEpochSecond(ZoneOffset.UTC)))
+                .build();
+
+        when(tweets.save(tweet1WithoutId)).thenReturn(tweet1WithId);
+        assertThat(service.handleNewTweet(incomingTweet1)).isEqualTo(outgoingTweetDTO);
+    }
 }
