@@ -2,6 +2,7 @@ package com.codecool.twatterspring.service;
 
 import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.TrendingHashtagsDTO;
+import com.codecool.twatterspring.model.dto.TrendingTweetDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -21,10 +22,10 @@ public class TrendingApiService {
         this.template = builder.build();
     }
 
-    public HttpStatus postNewTweet(Tweet tweet) {
+    public HttpStatus postNewTweet(TrendingTweetDTO tweet) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Tweet> request = new HttpEntity<>(tweet, headers);
+        HttpEntity<TrendingTweetDTO> request = new HttpEntity<>(tweet, headers);
         ResponseEntity<?> response = template.postForEntity(
                 BASE_URL,
                 request,

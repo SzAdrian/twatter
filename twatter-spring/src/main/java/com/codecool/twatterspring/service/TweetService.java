@@ -5,6 +5,7 @@ import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
 import com.codecool.twatterspring.model.dto.OutgoingTweetDTO;
 import com.codecool.twatterspring.model.dto.TimelineTweetDTO;
+import com.codecool.twatterspring.model.dto.TrendingTweetDTO;
 import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,13 @@ public class TweetService {
                            .build();
 
         tweet = tweets.save(tweet);
-        trending.postNewTweet(tweet);
+        trending.postNewTweet(
+                TrendingTweetDTO.builder()
+                        .id(tweet.getId())
+                        .content(tweet.getContent())
+                        .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
+                        .build()
+        );
 
         return OutgoingTweetDTO.builder()
                                .id(tweet.getId())
