@@ -46,4 +46,10 @@ public class TweetServiceTest {
     public void init() {
         service = new TweetService(tweets, users, trendingApi);
     }
+
+    @Test
+    public void initTest() {
+        assertThat(service).isNotNull();
+    }
+
 }
