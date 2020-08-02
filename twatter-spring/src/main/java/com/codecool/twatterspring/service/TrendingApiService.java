@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class TrendingApiService {
 
@@ -42,6 +44,14 @@ public class TrendingApiService {
         ResponseEntity<TrendingHashtagsDTO> response = template.getForEntity(
                 baseUrl+ "/" + interval,
                 TrendingHashtagsDTO.class
+        );
+        return response.getBody();
+    }
+
+    public Long[] getTweetIDsByTrendingHashtag(String hashtag) {
+        ResponseEntity<Long[]>response = template.getForEntity(
+                baseUrl + "/" + "hashtag",
+                Long[].class
         );
         return response.getBody();
     }
