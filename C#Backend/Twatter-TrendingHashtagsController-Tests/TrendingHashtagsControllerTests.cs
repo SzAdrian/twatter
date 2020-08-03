@@ -65,7 +65,7 @@ namespace Twatter_TrendingHashtagsController_Tests
         }
 
         [Fact]
-        public async void WeeklyTrendingHashtags_Returns_NotFoundObjectResult_With_WeeklyyHashtagsNotFound_When_RepositoryReturnsNull()
+        public async void WeeklyTrendingHashtags_Returns_NotFoundObjectResult_With_WeeklyHashtagsNotFound_When_RepositoryReturnsNull()
         {
             repository.HashtagRepository.GetTrendingHashtagsByTimeFilter(Arg.Any<DateTime>()).ReturnsNull();
 

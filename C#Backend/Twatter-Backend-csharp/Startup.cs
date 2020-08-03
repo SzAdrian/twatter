@@ -35,7 +35,7 @@ namespace Twatter_Backend_csharp
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContextPool<TrendingContext>(
-                opt => opt.UseSqlServer(Configuration.GetConnectionString("TrendingDbConnection")));
+                opt => opt.UseNpgsql(Configuration.GetConnectionString("TrendingDbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
