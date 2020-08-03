@@ -50,7 +50,7 @@ public class TrendingApiService {
 
     public Long[] getTweetIDsByTrendingHashtag(String hashtag) {
         ResponseEntity<Long[]>response = template.getForEntity(
-                baseUrl + "/" + "hashtag",
+                baseUrl + "/" + hashtag,
                 Long[].class
         );
         return response.getBody();
