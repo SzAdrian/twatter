@@ -48,36 +48,13 @@ namespace Twatter_Backend_csharp.Controllers
             return Ok(ControllerResponse.AddingHashtagSuccesfull.ToString());
         }
 
-        [HttpPost("AddHashtag")]
-        public async Task<IActionResult> AddHashtag([FromBody] Hashtag hashtag)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ControllerResponse.InvalidModelState.ToString());
-            }
-
-            if(hashtag == null)
-            {
-                return BadRequest(ControllerResponse.HashtagCannotBeNull.ToString());
-            }
-
-            hashtag.Date = DateTime.Now;
-            var result = await _repository.HashtagRepository.Add(hashtag);
-
-            if (!result) return StatusCode(500, ControllerResponse.AddingHashtagFailed.ToString());
-
-            await _repository.Complete();
-
-            return Ok(ControllerResponse.AddingHashtagSuccesfull.ToString()); 
-        }
-
         // Needs documentation !
 
         //TrendingHashtags:
         //  -This method returns the top 20 trending hashtags filtered by a specified date.
         //
         //Params: 
-        //  - string Date : The specified Date in string fromat for filtering hashtags.
+        //  - string date : The specified date in string fromat for filtering hashtags.
         //
 
         [HttpGet]

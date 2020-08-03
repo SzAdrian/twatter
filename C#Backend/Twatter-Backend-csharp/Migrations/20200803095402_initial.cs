@@ -9,7 +9,7 @@ namespace Twatter_Backend_csharp.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Hashtags",
+                name: "hashtags",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -27,7 +27,7 @@ namespace Twatter_Backend_csharp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Hashtags");
+                name: "hashtags");
         }
     }
 }

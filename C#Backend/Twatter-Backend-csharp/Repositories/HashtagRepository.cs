@@ -54,9 +54,9 @@ namespace Twatter_Backend_csharp.Repositories
         {
             Hashtag newHashtag = new Hashtag
             {
-                Name = sb.ToString(),
-                Date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture),
-                TweetId = tweet.Id
+                name = sb.ToString(),
+                date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture),
+                tweetid = tweet.Id
             };
             return newHashtag;
         }
@@ -94,13 +94,13 @@ namespace Twatter_Backend_csharp.Repositories
 
             var hashtagList = await _hashtags
                 .Select(h => h)
-                .Where(h => h.Name.Equals(hashtag))
-                .OrderByDescending(h => h.Date)
+                .Where(h => h.name.Equals(hashtag))
+                .OrderByDescending(h => h.date)
                 .Take(30)
                 .ToListAsync();
 
             var tweetIds = hashtagList
-                .Select(hashtag => hashtag.TweetId)
+                .Select(hashtag => hashtag.tweetid)
                 .ToList();
 
             return tweetIds;
@@ -130,11 +130,11 @@ namespace Twatter_Backend_csharp.Repositories
         {
             var DailyHashtags = await _hashtags
                 .Select(h => h)
-                .Where(h => h.Date >= timeFilter)
+                .Where(h => h.date >= timeFilter)
                 .ToListAsync();
 
             var GrouppedHashtags = DailyHashtags
-                .GroupBy(h => h.Name)
+                .GroupBy(h => h.name)
                 .Select(group => new
                 {
                     Hashtag = group.Key,

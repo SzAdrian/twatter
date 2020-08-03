@@ -15,7 +15,7 @@ namespace Twatter_Backend_csharp.Units
         public UnitOfWork(TrendingContext context)
         {
             _context = context;
-            HashtagRepository = new HashtagRepository(_context.Hashtags);
+            HashtagRepository = new HashtagRepository(_context.hashtags);
         }
 
         public IHashtagRepository HashtagRepository { get; private set; }
