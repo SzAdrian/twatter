@@ -33,20 +33,32 @@ namespace Twatter_Backend_csharp.Repositories
             {
                 if (new Regex(@"#").IsMatch(tweet.Content[i].ToString())) hashtagFound = true;
                 else if (hashtagFound == false) continue;
-                else if (hashtagFound == true && new Regex(@"^\w+$").IsMatch(tweet.Content[i].ToString())) sb.Append(tweet.Content[i].ToString());
-                else
+                else if (hashtagFound == true && new Regex(@"^\w+$").IsMatch(tweet.Content[i].ToString()))
+                {
+                    sb.Append(tweet.Content[i].ToString());
+                    if (i == tweet.Content.Length - 1) hashtags.Add(CreateHashtag(sb, tweet));
+                    
+                }
+                else if (hashtagFound == true && !new Regex(@"^\w+$").IsMatch(tweet.Content[i].ToString()))
                 {
                     hashtagFound = false;
-                    Hashtag newHashtag = new Hashtag();
-                    newHashtag.Name = sb.ToString();
-                    newHashtag.Date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture);
-                    newHashtag.TweetId = tweet.Id;
-                    hashtags.Add(newHashtag);
+                    hashtags.Add(CreateHashtag(sb, tweet));
                     sb.Clear();
                 }
             }
                    
             return hashtags;
+        }
+
+        private Hashtag CreateHashtag(StringBuilder sb, Tweet tweet)
+        {
+            Hashtag newHashtag = new Hashtag
+            {
+                Name = sb.ToString(),
+                Date = Convert.ToDateTime(tweet.Posted_at, CultureInfo.InvariantCulture),
+                TweetId = tweet.Id
+            };
+            return newHashtag;
         }
 
         public Task<bool> Add(Hashtag entity)
