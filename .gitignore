@@ -338,3 +338,13 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+
+# adding C# binaries because git does not identify [Bb]in and [Oo]bj
+bin/
+obj/
+
+# adding vscode
+.vscode/
+
+# adding c# appsettings in order not to commit db credentials
+appsettings.json
