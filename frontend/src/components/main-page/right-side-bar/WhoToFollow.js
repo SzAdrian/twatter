@@ -100,11 +100,11 @@ const WhoToFollowStyle = styled.div`
 `
 
 
-function WhoToFollow() {
+function WhoToFollow(props) {
 
     return (
         <WhoToFollowStyle>
-            <div className="who-to-follow-title">Who To follow</div>
+            <div className="who-to-follow-title">{props.title}</div>
             <div className="who-to-follow-container">
                 <div className="who-to-follow-items">
                     <img src={image} alt=""/>

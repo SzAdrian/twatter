@@ -19,11 +19,10 @@ export default function LoginPage() {
     flex-direction: column;
 
     .h1 {
-      color: "white";
-      margin-top: "30px";
-      margin-bottom: "10px";
-
-      overflow-wrap: "break-word";
+      color: white;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
 
       text-align: center;
     }
