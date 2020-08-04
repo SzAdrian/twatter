@@ -87,7 +87,7 @@ const TrendsForYouStyle = styled.div`
     justify-content: start;
     align-items: center;
     font-size: 1.5rem;
-    color: rgb(29, 161, 242);
+    color: var(--secondary);
     padding: 13px 15px;
     transition: background-color 0.24s ease;
     cursor: pointer;
@@ -102,7 +102,7 @@ const TrendsForYouStyle = styled.div`
     transition: background-color 0.24s ease;
 
     height: 33px;
-    fill: rgb(175, 175, 175);
+    fill: var(--secondary);
     border-radius: 50%;
     padding: 5px;
     cursor: pointer;

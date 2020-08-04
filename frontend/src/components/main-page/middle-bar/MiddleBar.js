@@ -31,12 +31,20 @@ const MiddleBarStyle = styled.div`
     font-size: 2rem;
     font-weight: 800;
   }
-
   .stars-button {
-    color: dodgerblue;
-    font-size: 3rem;
+    line-height: 1;
+    border-radius: 50%;
+    padding: 8px;
   }
+  .stars-button svg {
+    fill: var(--secondary);
+    font-size: 3rem;
 
+    height: 22px;
+  }
+  .stars-button:hover {
+    background-color: var(--secondaryTransparent);
+  }
   .middle-bar-container {
     position: relative;
     top: 54px;
@@ -46,12 +54,6 @@ const MiddleBarStyle = styled.div`
     width: 100%;
     height: 10px;
     background-color: rgb(56, 68, 77);
-  }
-  svg {
-    padding-left: 15px;
-
-    height: 22px;
-    fill: rgb(175, 175, 175);
   }
 `;
 

@@ -12,10 +12,10 @@ const LeftBottomPanelStyle = styled.div`
   height: 50px;
   cursor: pointer;
   align-items: center;
-  transition: background-color .24s ease;
+  transition: background-color 0.24s ease;
 
   :hover {
-    background-color: rgba(29, 161, 242, 0.1);
+    background-color: var(--secondaryTransparent);
   }
 
   img {
