@@ -6,6 +6,7 @@ import TwatterLogo from "components/shared/TwatterLogo";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import Axios from "axios";
 
 let SignUpPageStyle = styled.div`
   display: flex;
@@ -163,7 +164,13 @@ let SignUpPageStyle = styled.div`
 
 function SignUp() {
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (values) => console.log(values);
+  const onSubmit = (values) => {
+    console.log(values);
+    Axios.post("http://localhost:8080/api/auth/register", {
+      username: values.name,
+      password: values.password,
+    });
+  };
 
   return (
     <>

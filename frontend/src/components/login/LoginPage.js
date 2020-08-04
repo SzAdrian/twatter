@@ -3,10 +3,13 @@ import InputField from "./InputField";
 import TwatterLogo from "../shared/TwatterLogo";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
-
+import Axios from "axios";
 export default function LoginPage() {
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (values) => console.log(values);
+  const onSubmit = (values) => {
+    console.log(values);
+    Axios.post("http://localhost:8080/api/auth/login", { ...values });
+  };
 
   let LoginStyle = styled.div`
     max-width: 600px;
@@ -132,12 +135,22 @@ export default function LoginPage() {
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
+          refi={register({
+            required: "Required",
+          })}
           type="text"
-          name="username_or_email"
+          name="username"
           label="Phone, e-mail, or username"
         />
 
-        <InputField type="password" name="password" label="Password" />
+        <InputField
+          refi={register({
+            required: "Required",
+          })}
+          type="password"
+          name="password"
+          label="Password"
+        />
         <button className="button" type="submit">
           <span>Log in</span>
         </button>
