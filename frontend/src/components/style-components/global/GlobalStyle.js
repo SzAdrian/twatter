@@ -40,7 +40,8 @@ const getSecondaryTransparent = style("secondary", {
 const GlobalStyle = createGlobalStyle`
 :root {
   --secondary: ${getSecondary};
-  --secondaryAlpha: ${getSecondaryTransparent}
+  --secondaryTransparent: ${getSecondaryTransparent};
+  --foreground:${getForeground};
 }
 
     *, *::before, *::after {
@@ -63,12 +64,6 @@ const GlobalStyle = createGlobalStyle`
         
     }
 
-    .secondary-bg{
-        background-color: ${getSecondary}
-    }
-    .secondary-bg:hover{
-        background-color: ${getSecondaryHover}
-    }
     
 `;
 

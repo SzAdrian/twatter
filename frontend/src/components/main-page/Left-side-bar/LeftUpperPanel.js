@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TwatterLogo from "components/shared/TwatterLogo";
 import icons from "../../shared/icons";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const LeftUpperPanelStyle = styled.div`
   grid-area: leftBar;
@@ -25,6 +25,8 @@ const MenuStyle = styled(Link)`
   text-decoration: none;
   width: max-content;
   font-weight: bold;
+  color: var(--getForeground);
+  fill: var(--getForeground);
 
   font-size: 1.8rem;
   margin: 15px;
@@ -32,7 +34,7 @@ const MenuStyle = styled(Link)`
   cursor: pointer;
   align-items: center;
   :hover {
-    background-color: var(--secondaryAlpha);
+    background-color: var(--secondaryTransparent);
     fill: var(--secondary);
     color: var(--secondary);
     transition: 0.24s;
