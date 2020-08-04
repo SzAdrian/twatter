@@ -132,9 +132,6 @@ export default function LoginPage() {
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
-          refi={register({
-            validate: (value) => value !== "fasz" || "Nice try!",
-          })}
           type="text"
           name="username_or_email"
           label="Phone, e-mail, or username"
@@ -144,7 +141,6 @@ export default function LoginPage() {
         <button className="button" type="submit">
           <span>Log in</span>
         </button>
-        {errors.username_or_email && errors.username_or_email.message}
       </form>
       <div className="links">
         <a href="#">Forgot password?</a>
