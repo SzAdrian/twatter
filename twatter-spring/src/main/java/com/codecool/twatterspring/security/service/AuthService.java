@@ -67,7 +67,7 @@ public class AuthService {
             .collect(Collectors.toList());
     }
 
-    private Cookie createTokenCookie(String jwt) {
+    public Cookie createTokenCookie(String jwt) {
         Cookie tokenCookie = new Cookie(TOKEN_COOKIE_NAME, jwt);
         tokenCookie.setHttpOnly(true);
         tokenCookie.setPath("/");

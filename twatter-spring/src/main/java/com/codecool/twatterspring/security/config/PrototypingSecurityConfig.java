@@ -12,7 +12,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
-@Profile({"development", "no_db"})
+@Profile({"development", "no_db & !security"})
 public class PrototypingSecurityConfig extends BaseSecurityConfig {
 
     public PrototypingSecurityConfig(JwtFilter jwtFilter) {
