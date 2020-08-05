@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import NewTweet from "../Tweet/NewTweet";
+import Twt from "../Tweet/Twt";
 import icons from "../../shared/icons";
 
 const MiddleBarStyle = styled.div`
@@ -65,6 +66,7 @@ function MiddleBar() {
       <div className="middle-bar-container">
         <NewTweet />
         <div className="csiik"></div>
+        <Twt />
       </div>
     </MiddleBarStyle>
   );
