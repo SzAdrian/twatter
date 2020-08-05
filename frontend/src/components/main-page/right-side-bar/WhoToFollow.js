@@ -95,37 +95,41 @@ const WhoToFollowStyle = styled.div`
   }
 `;
 
-function WhoToFollow() {
-  return (
-    <WhoToFollowStyle>
-      <div className="who-to-follow-title">Who To follow</div>
-      <div className="who-to-follow-container">
-        <div className="who-to-follow-items">
-          <img src={image} alt="" />
-          <div className="who-to-follow-items-content">
-            <div className="who-to-follow-item-names">
-              <div>Formula 1</div>
-              <i className="fas fa-check"></i>
+function WhoToFollow(props) {
+
+    return (
+        <WhoToFollowStyle>
+            <div className="who-to-follow-title">{props.title}</div>
+            <div className="who-to-follow-container">
+                <div className="who-to-follow-items">
+                    <img src={image} alt=""/>
+                    <div className="who-to-follow-items-content">
+                        <div className="who-to-follow-item-names">
+                            <div>Formula 1</div>
+                            <i className="fas fa-check"></i>
+                        </div>
+                        <div className="who-to-follow-item-tags">@F1</div>
+                    </div>
+                    <button className="follow-button"> Follow</button>
+                </div>
+                <div className="who-to-follow-items">
+                    <img src={image} alt=""/>
+                    <div className="who-to-follow-items-content">
+                        <div className="who-to-follow-item-names">
+                            <div>PC Gamer</div>
+                            <i className="fas fa-check"></i>
+                        </div>
+                        <div className="who-to-follow-item-tags">@pcgamer</div>
+                    </div>
+                    <button className="follow-button"> Follow</button>
+                </div>
             </div>
-            <div className="who-to-follow-item-tags">@F1</div>
-          </div>
-          <button className="follow-button"> Follow</button>
-        </div>
-        <div className="who-to-follow-items">
-          <img src={image} alt="" />
-          <div className="who-to-follow-items-content">
-            <div className="who-to-follow-item-names">
-              <div>PC Gamer</div>
-              <i className="fas fa-check"></i>
-            </div>
-            <div className="who-to-follow-item-tags">@pcgamer</div>
-          </div>
-          <button className="follow-button"> Follow</button>
-        </div>
-      </div>
-      <div className="show-more">Show more</div>
-    </WhoToFollowStyle>
-  );
+            <div className="show-more">Show more</div>
+
+
+        </WhoToFollowStyle>
+    )
+
 }
 
 export default WhoToFollow;
