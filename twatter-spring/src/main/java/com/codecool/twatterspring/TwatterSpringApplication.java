@@ -21,8 +21,8 @@ import java.util.Arrays;
 @EnableSwagger2
 public class TwatterSpringApplication {
 
-    @Autowired
-    TimelineRepository timelineRepository;
+//    @Autowired
+//    TimelineRepository timelineRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(TwatterSpringApplication.class, args);
@@ -37,22 +37,22 @@ public class TwatterSpringApplication {
             .build();
     }
 
-    @Bean
-    public CommandLineRunner init(){
-
-
-        return (args) -> {
-
-            TimelineTweetDTO timelineTweetDTO = TimelineTweetDTO.builder().id(1L).build();
-            Timeline timelineTest = Timeline
-                    .builder()
-                    .userId(1L)
-                    .homeTweetDTOS(Arrays.asList(timelineTweetDTO))
-                    .build();
-
-            timelineRepository.save(timelineTest);
-
-        };
-
-    }
+//    @Bean
+//    public CommandLineRunner init(){
+//
+//
+//        return (args) -> {
+//
+//            TimelineTweetDTO timelineTweetDTO = TimelineTweetDTO.builder().id(1L).build();
+//            Timeline timelineTest = Timeline
+//                    .builder()
+//                    .userId(1L)
+//                    .homeTweetDTOS(Arrays.asList(timelineTweetDTO))
+//                    .build();
+//
+//            timelineRepository.save(timelineTest);
+//
+//        };
+//
+//    }
 }

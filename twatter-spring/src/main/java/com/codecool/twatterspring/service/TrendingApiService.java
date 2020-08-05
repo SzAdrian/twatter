@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,7 +24,7 @@ public class TrendingApiService {
 
     private final RestTemplate template;
 
-    public TrendingApiService(RestTemplateBuilder builder, @Value("$(twatter.trending-api.base-url)") String baseUrl) {
+    public TrendingApiService(RestTemplateBuilder builder, @Value("${twatter.trending-api.base-url}") String baseUrl) {
         this.template = builder.build();
         this.baseUrl = baseUrl;
     }
@@ -41,8 +42,14 @@ public class TrendingApiService {
     }
 
     public TrendingHashtagsDTO getTradingHashtagsByTimeInterval(String interval) {
-        ResponseEntity<TrendingHashtagsDTO> response = template.getForEntity(
-                baseUrl+ "/" + interval,
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.ALL));
+        HttpEntity<String> request = new HttpEntity<>(null, headers);
+        System.out.println(request.toString());
+        ResponseEntity<TrendingHashtagsDTO> response = template.exchange(
+                baseUrl + "/" + interval,
+                HttpMethod.GET,
+                request,
                 TrendingHashtagsDTO.class
         );
         return response.getBody();
