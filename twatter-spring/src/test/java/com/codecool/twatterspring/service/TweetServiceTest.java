@@ -32,11 +32,11 @@ public class TweetServiceTest {
 
     private TweetService service;
 
-    @Mock
+    @MockBean
     TweetRepository tweets;
-    @Mock
+    @MockBean
     TwatterUserRepository users;
-    @Mock
+    @MockBean
     TrendingApiService trendingApi;
 
     @MockBean
