@@ -12,12 +12,15 @@ namespace Twatter_Backend_csharp.Repositories.Interface
         Task<Hashtag> Get(Expression<Func<Hashtag, bool>> expression);
         Task<Hashtag> GetById(long id);
         Task<IEnumerable<Hashtag>> GetAll();
-        IEnumerable<Hashtag> Find(Expression<Func<Hashtag, bool>> expression);
+        Task<IEnumerable<Hashtag>> Find(Expression<Func<Hashtag, bool>> expression);
         Task<Hashtag> SingleOrDefault(Expression<Func<Hashtag, bool>> expression);
-        void Add(Hashtag entity);
-        void AddRange(IEnumerable<Hashtag> entities);
+        Task<bool> Add(Hashtag entity);
+        Task<bool> AddRange(IEnumerable<Hashtag> entities);
         void Remove(Hashtag entity);
         void RemoveRange(IEnumerable<Hashtag> entities);
         void Update(Hashtag entity);
+        Task<HashtagList> GetTrendingHashtagsByTimeFilter(DateTime date);
+        IList<Hashtag> GetHashtagsFromTweet(Tweet tweet);
+        Task<List<string>> GetTweetIds(string hashtag);
     }
 }

@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Twatter_Backend_csharp.Context;
+using Twatter_Backend_csharp.Units;
+using Twatter_Backend_csharp.Units.Interface;
 
 namespace Twatter_Backend_csharp
 {
@@ -30,8 +32,10 @@ namespace Twatter_Backend_csharp
             services.AddControllers();
             services.AddMvc();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddDbContextPool<TrendingContext>(
-                opt => opt.UseSqlServer(Configuration.GetConnectionString("TrendingDbConnection")));
+                opt => opt.UseNpgsql(Configuration.GetConnectionString("TrendingDbConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
