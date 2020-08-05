@@ -1,7 +1,6 @@
 package com.codecool.twatterspring.model;
 
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
-import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.Column;

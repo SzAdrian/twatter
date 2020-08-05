@@ -1,21 +1,14 @@
 package com.codecool.twatterspring.service;
 
-import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.TrendingHashtagsDTO;
 import com.codecool.twatterspring.model.dto.TrendingTweetDTO;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
-import java.util.List;
 
 @Service
 public class TrendingApiService {
