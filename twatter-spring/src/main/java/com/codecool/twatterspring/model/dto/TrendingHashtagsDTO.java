@@ -6,11 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonSerialize
 public class TrendingHashtagsDTO {
-    private String[] trendingHashtags;
+    private String timeFilter;
+    private Hashtag[] trendingHashtags;
 }

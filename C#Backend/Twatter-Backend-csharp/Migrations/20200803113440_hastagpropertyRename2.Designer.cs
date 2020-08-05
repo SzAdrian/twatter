@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Twatter_Backend_csharp.Context;
@@ -9,9 +10,10 @@ using Twatter_Backend_csharp.Context;
 namespace Twatter_Backend_csharp.Migrations
 {
     [DbContext(typeof(TrendingContext))]
-    partial class TrendingContextModelSnapshot : ModelSnapshot
+    [Migration("20200803113440_hastagpropertyRename2")]
+    partial class hastagpropertyRename2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
