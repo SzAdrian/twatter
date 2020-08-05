@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/api/auth")
 @Slf4j
+@CrossOrigin("*")
 public class AuthController {
 
     private final AuthService authService;
@@ -36,8 +37,8 @@ public class AuthController {
         authService.logout(response);
     }
     
-    @PostMapping("registration")
-    public boolean register(AuthDTO registrationDTO) {
+    @PostMapping("register")
+    public boolean register(@RequestBody AuthDTO registrationDTO) {
         log.info("Registration request received: " + registrationDTO.toString());
         return authService.tryRegister(registrationDTO);
     }
