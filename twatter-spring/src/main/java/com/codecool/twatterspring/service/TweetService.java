@@ -5,6 +5,7 @@ import com.codecool.twatterspring.model.Tweet;
 import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
 import com.codecool.twatterspring.model.dto.OutgoingTweetDTO;
 import com.codecool.twatterspring.model.dto.TimelineTweetDTO;
+import com.codecool.twatterspring.model.dto.TrendingTweetDTO;
 import com.codecool.twatterspring.repository.TwatterUserRepository;
 import com.codecool.twatterspring.repository.TweetRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,30 +25,18 @@ public class TweetService {
     private final TrendingApiService trending;
 
     public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
-        Tweet tweet = Tweet.builder()
-                           .userId(dto.getUserId())
-                           .content(dto.getContent())
-                           .date(LocalDateTime.now())
-                           .build();
+        Tweet tweet = tweets.save(new Tweet().fromDTO(dto));
+        trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
 
-        tweet = tweets.save(tweet);
-        trending.postNewTweet(tweet);
-
-        return OutgoingTweetDTO.builder()
-                               .id(tweet.getId())
-                               .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                               .build();
+        return new OutgoingTweetDTO().fromEntity(tweet);
     }
     public List<TimelineTweetDTO> provideTweetsForUserTimelineBy(Long userId) {
         List<Tweet> userTweets = tweets.findAllByUserId(userId);
         return userTweets.stream()
-                         .map(tweet -> TimelineTweetDTO.builder()
-                                           .id(tweet.getId())
-                                           .content(tweet.getContent())
-                                           .userId(tweet.getUserId())
-                                           .username(users.getUsernameByUserId(tweet.getUserId()))
-                                           .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                                           .build())
+                         .map(tweet -> new TimelineTweetDTO().fromEntity(
+                                 tweet,
+                                 users.getUsernameByUserId(tweet.getUserId()))
+                         )
                          .collect(Collectors.toList());
     }
 
@@ -59,13 +48,10 @@ public class TweetService {
         List<Tweet> followeeTweets = tweets.findLimitedNumberOfTweetsByFolloweeIds(followeeIds);
 
         return followeeTweets.stream()
-                             .map(tweet -> TimelineTweetDTO.builder()
-                                                .id(tweet.getId())
-                                                .content(tweet.getContent())
-                                                .userId(tweet.getUserId())
-                                                .username(users.getUsernameByUserId(tweet.getUserId()))
-                                                .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
-                                                .build())
+                             .map(tweet -> new TimelineTweetDTO().fromEntity(
+                                     tweet,
+                                     users.getUsernameByUserId(tweet.getUserId()))
+                             )
                              .collect(Collectors.toList());
     }
 }

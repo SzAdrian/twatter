@@ -21,10 +21,6 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
         "/v2/api-docs",
         "/webjars/**"
     };
-
-    public BaseSecurityConfig() {
-        this.jwtFilter = null;
-    }
     
     public BaseSecurityConfig(JwtFilter jwtFilter) {
         this.jwtFilter = jwtFilter;

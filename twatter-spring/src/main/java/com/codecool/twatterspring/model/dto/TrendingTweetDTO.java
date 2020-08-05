@@ -12,13 +12,15 @@ import java.time.ZoneOffset;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OutgoingTweetDTO {
+public class TrendingTweetDTO {
     private Long id;
+    private String content;
     private String postedAt;
 
-    public OutgoingTweetDTO fromEntity(Tweet tweet) {
-        return tweet == null ? null : OutgoingTweetDTO.builder()
+    public TrendingTweetDTO fromEntity(Tweet tweet) {
+        return tweet == null ? null : TrendingTweetDTO.builder()
                 .id(tweet.getId())
+                .content(tweet.getContent())
                 .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
                 .build();
     }

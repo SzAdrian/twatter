@@ -1,9 +1,8 @@
 package com.codecool.twatterspring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.codecool.twatterspring.model.dto.IncomingTweetDTO;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,6 +26,15 @@ public class Tweet {
     private String content;
 
     @Column(nullable = false)
+    @EqualsAndHashCode.Exclude
     private LocalDateTime date;
+
+    public Tweet fromDTO(IncomingTweetDTO dto) {
+        return dto == null ? null : Tweet.builder()
+                .userId(dto.getUserId())
+                .content(dto.getContent())
+                .date(LocalDateTime.now())
+                .build();
+    }
 
 }
