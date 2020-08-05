@@ -3,14 +3,18 @@ package com.codecool.twatterspring.controller;
 import com.codecool.twatterspring.model.AuthDTO;
 import com.codecool.twatterspring.security.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/auth")
 @Slf4j
-@CrossOrigin("*")
+@CrossOrigin
 public class AuthController {
 
     private final AuthService authService;
@@ -41,5 +45,16 @@ public class AuthController {
     public boolean register(@RequestBody AuthDTO registrationDTO) {
         log.info("Registration request received: " + registrationDTO.toString());
         return authService.tryRegister(registrationDTO);
+    }
+    @GetMapping("/isloggedin")
+    public ResponseEntity<Object> me(HttpServletRequest http) {
+        System.out.println(Arrays.toString(http.getCookies()));
+        if (!SecurityContextHolder.getContext()
+                .getAuthentication().isAuthenticated()) {
+            return ResponseEntity.status(403).body("No user!");
+        }
+        return  ResponseEntity.ok(SecurityContextHolder.getContext()
+                .getAuthentication().getCredentials());
+
     }
 }
