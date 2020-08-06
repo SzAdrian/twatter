@@ -2,7 +2,9 @@ package com.codecool.twatterspring.controller;
 
 import com.codecool.twatterspring.model.AuthDTO;
 import com.codecool.twatterspring.security.service.AuthService;
+import com.codecool.twatterspring.security.service.JwtService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +21,11 @@ public class AuthController {
 
     private final AuthService authService;
 
-    public AuthController(AuthService authService) {
+    private final JwtService jwtService;
+
+    public AuthController(AuthService authService,JwtService jwtService) {
         this.authService = authService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping(value = "login", consumes = "application/x-www-form-urlencoded")
@@ -46,15 +51,14 @@ public class AuthController {
         log.info("Registration request received: " + registrationDTO.toString());
         return authService.tryRegister(registrationDTO);
     }
-    @GetMapping("/isloggedin")
-    public ResponseEntity<Object> me(HttpServletRequest http) {
-        System.out.println(Arrays.toString(http.getCookies()));
-        if (!SecurityContextHolder.getContext()
-                .getAuthentication().isAuthenticated()) {
-            return ResponseEntity.status(403).body("No user!");
-        }
-        return  ResponseEntity.ok(SecurityContextHolder.getContext()
-                .getAuthentication().getCredentials());
 
+    @GetMapping("/isloggedin")
+    public ResponseEntity<Object> me(@CookieValue(value="JWT" ,required=false) String jwt) {
+        if(jwt == null) return ResponseEntity.status(200).body(false);
+        boolean isValidated = jwtService.validateToken(jwt);
+        if (!isValidated) {
+            return ResponseEntity.status(200).body(false);
+        }
+        return  ResponseEntity.status(200).body(true);
     }
 }

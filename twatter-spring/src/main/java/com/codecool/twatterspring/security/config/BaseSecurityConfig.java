@@ -32,7 +32,7 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
             .authorizeRequests()
-                .antMatchers("/api/auth/login", "/api/auth/register", "/favicon*")
+                .antMatchers("/api/auth/login", "/api/auth/register", "/favicon*","/api/auth/isloggedin")
                     .permitAll()
                 .antMatchers(SWAGGER_WHITELIST)
                     .permitAll()
