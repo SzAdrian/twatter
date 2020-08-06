@@ -8,21 +8,24 @@ import { ThemeProvider } from "styled-components";
 import Profile from "./components/profile/Profile";
 import useTheme from "./components/hooks/useTheme";
 import PrivateRoute from "components/PrivateRoute";
+import AuthContextProvider from "./components/AuthContext";
 
 function App() {
   const theme = useTheme();
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Router>
-        <div className="App">
-          <PrivateRoute exact path="/home" component={MainPage} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignUp} />
-          <Route exact path="/profile" component={Profile} />
-        </div>
-      </Router>
+      <AuthContextProvider>
+        <GlobalStyle />
+        <Router>
+          <div className="App">
+            <PrivateRoute exact path="/home" component={MainPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/profile" component={Profile} />
+          </div>
+        </Router>
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }
