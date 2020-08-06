@@ -10,6 +10,8 @@ import useTheme from "./components/hooks/useTheme";
 import PrivateRoute from "components/PrivateRoute";
 import AuthContextProvider from "./components/Context/AuthContext";
 import UserContextProvider from "components/Context/UserContext";
+import ChangeMode from "./components/Theming/ChangeMode";
+import DisplayModal from "./components/main-page/Left-side-bar/DisplayModal";
 
 function App() {
   const theme = useTheme();
@@ -25,6 +27,7 @@ function App() {
               <Route exact path="/login" component={LoginPage} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/i/display" component={DisplayModal} />
             </div>
           </Router>
         </UserContextProvider>

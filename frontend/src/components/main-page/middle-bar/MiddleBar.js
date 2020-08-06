@@ -54,7 +54,7 @@ const MiddleBarStyle = styled.div`
   .csiik {
     width: 100%;
     height: 10px;
-    background-color: rgb(56, 68, 77);
+    background-color: var(--searchBackground);
   }
 `;
 

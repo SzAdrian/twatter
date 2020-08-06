@@ -11,7 +11,11 @@ const getForeground = style("mode", {
   light: "rgb(21, 32, 43)",
   black: "rgb(217, 217, 217)",
 });
-
+const getSearchBackground = style("mode", {
+  dim: "rgb(37, 51, 65)",
+  light: "rgb(230, 236, 240)",
+  black: "rgb(32, 35, 39)",
+});
 const getSecondary = style("secondary", {
   blue: "rgb(29,161,242)",
   yellow: "rgb(255, 173, 31)",
@@ -19,6 +23,11 @@ const getSecondary = style("secondary", {
   purple: "rgb(121, 75, 196)",
   orange: "rgb(244, 93, 34)",
   green: "rgb(23, 191, 99)",
+});
+const getOffSetBackground = style("mode", {
+  dim: "rgb(25, 39, 52)",
+  light: "rgb(245, 248, 250)",
+  black: "rgb(21, 24, 28)",
 });
 const getSecondaryHover = style("secondary", {
   blue: "rgb(29,161,242)",
@@ -42,6 +51,9 @@ const GlobalStyle = createGlobalStyle`
   --secondary: ${getSecondary};
   --secondaryTransparent: ${getSecondaryTransparent};
   --foreground:${getForeground};
+  --offSetBackground:${getOffSetBackground};
+  --searchBackground:${getSearchBackground};
+  --background:${getBackground};
 }
 
     *, *::before, *::after {

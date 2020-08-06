@@ -95,9 +95,9 @@ export default function LeftUpperPanel() {
         {icons.profile}
         Profile
       </MenuStyle>
-      <MenuStyle to="#">
+      <MenuStyle to="/i/display">
         {icons.more}
-        More
+        Display
       </MenuStyle>
       <TweetButtonStyle>Tweet</TweetButtonStyle>
     </LeftUpperPanelStyle>

@@ -2,7 +2,9 @@ import React from "react";
 import theme from "styled-theming";
 import styled, { ThemeConsumer } from "styled-components";
 
-let ChangeTheme = styled.div``;
+let ChangeTheme = styled.div`
+    
+`;
 
 export default function ChangeMode(props) {
   return (

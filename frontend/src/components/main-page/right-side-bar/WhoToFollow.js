@@ -3,7 +3,7 @@ import styled from "styled-components";
 import image from "../../../gorillatwatter.png";
 
 const WhoToFollowStyle = styled.div`
-  background-color: rgb(25, 39, 52);
+  background-color: var(--offSetBackground);
   width: 100%;
   min-height: 200px;
   border-radius: 1.5rem;
@@ -11,7 +11,6 @@ const WhoToFollowStyle = styled.div`
 
   .who-to-follow-title {
     font-size: 2rem;
-    color: white;
     font-weight: 900;
     width: 100%;
     height: 45px;
@@ -35,7 +34,6 @@ const WhoToFollowStyle = styled.div`
 
   .who-to-follow-items img {
     width: 50px;
-    background-color: white;
     border-radius: 3rem;
   }
 
@@ -46,7 +44,6 @@ const WhoToFollowStyle = styled.div`
   .who-to-follow-item-names {
     display: flex;
     flex-direction: row;
-    color: white;
     font-size: 1.5rem;
     font-weight: 700;
   }

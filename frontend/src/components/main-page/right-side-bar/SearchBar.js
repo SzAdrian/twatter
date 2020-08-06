@@ -9,7 +9,7 @@ const SearchBarStyle = styled.div`
   align-items: center;
   width: 100%;
   height: 42px;
-  background-color: rgb(37, 51, 65);
+  background-color: var(--searchBackground);
   border-radius: 2rem;
   margin: 5px 5px 15px 0;
 

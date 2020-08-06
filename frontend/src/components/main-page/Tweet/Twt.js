@@ -4,7 +4,6 @@ import profilepic from "../../shared/defaultprofilepic.jpg";
 import icons from "../../shared/icons";
 
 const TwtStyle = styled.div`
-  color: white;
   font-size: 1.8rem;
   cursor: pointer;
 
@@ -35,6 +34,10 @@ const TweetFooterStyle = styled.div`
   display: flex;
   justify-content: space-evenly;
   border-bottom: 1px solid rgb(56, 68, 77);
+  div{
+      width: 25px;
+      height: 25px;
+  }
 `;
 
 export default function tweet() {

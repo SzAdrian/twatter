@@ -37,13 +37,19 @@ const LeftBottomPanelStyle = styled.div`
 const UserNameStyle = styled.div`
   display: flex;
   flex-direction: column;
-  font-weight: bold;
-  color: white;
+  font-weight: 700;
   font-size: 1.3rem;
   align-items: center;
+  .email {
+      color: rgb(136, 153, 166);
+      font-weight: 500;
+  }
 `;
 
 const Logout = styled.div`
+  svg {
+    fill: var(--foreground);
+  }
   padding: 9px;
   border-radius: 50%;
   :hover {
@@ -59,7 +65,7 @@ export default function LeftBottomPanel() {
       <img src={profilepic} alt="" />
       <UserNameStyle>
         <div>{user.username}</div>
-        <div>@{user.username}</div>
+        <div className="email">@{user.username}</div>
       </UserNameStyle>
       <Logout onClick={logout}>{icons.logout}</Logout>
     </LeftBottomPanelStyle>

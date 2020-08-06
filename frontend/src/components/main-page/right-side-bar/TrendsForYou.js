@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import icons from "../../shared/icons";
 const TrendsForYouStyle = styled.div`
-  background-color: rgb(25, 39, 52);
+  background-color: var(--offSetBackground);
   width: 100%;
   min-height: 200px;
   border-radius: 1.5rem;
@@ -21,7 +21,6 @@ const TrendsForYouStyle = styled.div`
 
   .trend-title-name {
     font-size: 2rem;
-    color: white;
     font-weight: 900;
   }
 
@@ -62,7 +61,7 @@ const TrendsForYouStyle = styled.div`
   }
 
   .trend-items i:hover {
-    background-color: rgba(68, 110, 163, 0.34);
+    background-color: var(--secondaryTransparent);
   }
 
   .trend-types {
@@ -71,7 +70,6 @@ const TrendsForYouStyle = styled.div`
   }
 
   .trend-titles {
-    color: white;
     font-size: 1.5rem;
     font-weight: 700;
   }
@@ -109,7 +107,7 @@ const TrendsForYouStyle = styled.div`
   }
 
   .settings:hover svg {
-    background-color: rgba(125, 134, 146, 0.2);
+    background-color: var(--secondaryTransparent);
   }
 `;
 
