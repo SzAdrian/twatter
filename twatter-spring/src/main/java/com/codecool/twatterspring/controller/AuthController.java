@@ -4,14 +4,10 @@ import com.codecool.twatterspring.model.AuthDTO;
 import com.codecool.twatterspring.security.service.AuthService;
 import com.codecool.twatterspring.security.service.JwtService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -29,13 +25,13 @@ public class AuthController {
     }
 
     @PostMapping(value = "login", consumes = "application/x-www-form-urlencoded")
-    public boolean formLogin(AuthDTO loginDTO, HttpServletResponse response) {
+    public Long formLogin(AuthDTO loginDTO, HttpServletResponse response) {
         log.info("Login request received: " + loginDTO.toString());
         return authService.tryLogin(loginDTO, response);
     }
 
     @PostMapping(value = "login", consumes = "application/json")
-    public boolean login(@RequestBody AuthDTO loginDTO, HttpServletResponse response) {
+    public Long login(@RequestBody AuthDTO loginDTO, HttpServletResponse response) {
         log.info("Login request received: " + loginDTO.toString());
         return authService.tryLogin(loginDTO, response);
     }

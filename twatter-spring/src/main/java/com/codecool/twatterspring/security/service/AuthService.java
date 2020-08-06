@@ -33,9 +33,12 @@ public class AuthService {
         this.userDao = twatterUserDao;
     }
 
-    public boolean tryLogin(AuthDTO loginDTO, HttpServletResponse response) {
+    public Long tryLogin(AuthDTO loginDTO, HttpServletResponse response) {
         Authentication authentication = tryAuthenticate(loginDTO);
-        return login(authentication, response);
+        if (login(authentication, response)){
+            return userDao.findBy(loginDTO.getUsername()).get().getId();
+        }
+        return -1L;
     }
 
     private Authentication tryAuthenticate(AuthDTO loginDTO) {

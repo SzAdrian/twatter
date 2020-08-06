@@ -2,15 +2,17 @@ package com.codecool.twatterspring.controller;
 
 import com.codecool.twatterspring.model.dto.TwatterUserProfileDTO;
 import com.codecool.twatterspring.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("api/users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<TwatterUserProfileDTO> getProfile(@PathVariable Long userId) {

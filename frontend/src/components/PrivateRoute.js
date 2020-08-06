@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 import Axios from "axios";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "./Context/AuthContext";
 
 export default function PrivateRoute({ component: Component, ...rest }) {
   const { isLogged, isLoggedIn } = useContext(AuthContext);

@@ -64,30 +64,30 @@ const TweetButtonStyle = styled.div`
 export default function LeftUpperPanel() {
   return (
     <LeftUpperPanelStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         <TwatterLogo width="28px" heigth="28px" />
       </MenuStyle>
       <MenuStyle to="/home">
         {icons.home}
         Home
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.explore}
         Explore
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.notifications}
         Notifications
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.messages}
         Messages
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.bookmarks}
         Bookmarks
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.lists}
         Lists
       </MenuStyle>
@@ -95,7 +95,7 @@ export default function LeftUpperPanel() {
         {icons.profile}
         Profile
       </MenuStyle>
-      <MenuStyle>
+      <MenuStyle to="#">
         {icons.more}
         More
       </MenuStyle>

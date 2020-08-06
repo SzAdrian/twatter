@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
 import InputField from "./InputField";
 import TwatterLogo from "../shared/TwatterLogo";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import Axios from "axios";
+import { UserContext } from "components/Context/UserContext";
+import storage from "local-storage-fallback";
+
 export default function LoginPage() {
   const { handleSubmit, register, errors } = useForm();
+  const { user, setUser } = useContext(UserContext);
   const onSubmit = (values) => {
-    console.log(values);
     Axios.post(
       "http://localhost:8080/api/auth/login",
       { ...values },
       { withCredentials: true }
-    );
+    ).then(({ data }) => {
+      data == -1
+        ? (window.location.href = "/login")
+        : Axios.get(`http://localhost:8080/api/users/${data}`, {
+            withCredentials: true,
+          }).then(({ data }) => {
+            storage.setItem("user", JSON.stringify(data));
+            setUser(data);
+            window.location.href = "/home";
+          });
+    });
   };
 
   let LoginStyle = styled.div`

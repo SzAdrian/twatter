@@ -24,7 +24,7 @@ public class TweetService {
 
     public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
         Tweet tweet = tweets.save(new Tweet().fromDTO(dto));
-        trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
+//        trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
 
         return new OutgoingTweetDTO().fromEntity(tweet);
     }
