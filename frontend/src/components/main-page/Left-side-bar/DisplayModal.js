@@ -19,6 +19,26 @@ const DisplayModalStyled = styled.div`
     grid-template-rows: 3fr 1fr 2fr 2fr 1fr ;
     padding: 2rem;
     
+    .secondaries {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        background-color: var(--offSetBackground);
+        border-radius: 2rem;
+        padding: 2rem;
+        margin: 10px 0;
+        div {
+            background-color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            padding: 25px;
+            margin: 5px;
+        }
+    }
+    
+    
     .modes {
         display: flex;
         flex-direction: row;
@@ -26,7 +46,8 @@ const DisplayModalStyled = styled.div`
         justify-content: center;
         background-color: var(--offSetBackground);
         border-radius: 2rem;
-        padding: 2rem;
+        padding: 1rem;
+        margin: 10px 0;
     }
     
     .modes div {
@@ -36,6 +57,7 @@ const DisplayModalStyled = styled.div`
         align-items: center;
         height: 73px;
         margin: 1.5rem;
+        font-size: 2rem;
         
     }
     .dim div {
@@ -88,11 +110,18 @@ function DisplayModal() {
 
                 </div>
                 <div className="font-sizes"></div>
-                <div className="secondaries"></div>
+                <div className="secondaries">
+                    <ChangeMode label="b" secondary="blue"/>
+                    <ChangeMode label="y" secondary="yellow"/>
+                    <ChangeMode label="p" secondary="pink"/>
+                    <ChangeMode label="p" secondary="purple"/>
+                    <ChangeMode label="o" secondary="orange"/>
+                    <ChangeMode label="g" secondary="green"/>
+                </div>
                 <div className="modes">
-                    <div className="dim"><ChangeMode  label="dim" mode="dim"/></div>
-                    <div className="light"><ChangeMode label="light" mode="light"/></div>
-                    <div className="black"><ChangeMode label="black" mode="black"/></div>
+                    <div className="dim"><ChangeMode  label="Dim" mode="dim"/></div>
+                    <div className="light"><ChangeMode label="Default" mode="light"/></div>
+                    <div className="black"><ChangeMode label="Lights out" mode="black"/></div>
                 </div>
                 <div className="button-div">
                     <Link to="/home">
