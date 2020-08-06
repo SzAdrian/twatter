@@ -3,7 +3,9 @@ import theme from "styled-theming";
 import styled, { ThemeConsumer } from "styled-components";
 
 let ChangeTheme = styled.div`
-    
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 export default function ChangeMode(props) {

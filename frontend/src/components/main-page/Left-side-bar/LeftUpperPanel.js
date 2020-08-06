@@ -44,6 +44,11 @@ const MenuStyle = styled(Link)`
     fill: var(--secondary);
     color: var(--secondary);
   }
+
+  .paint {
+    position: absolute;
+    fill: var(--secondary);
+  }
 `;
 
 const TweetButtonStyle = styled.div`
@@ -96,7 +101,8 @@ export default function LeftUpperPanel() {
         Profile
       </MenuStyle>
       <MenuStyle to="/i/display">
-        {icons.more}
+        <span>{icons.displaySetting}</span>
+        <span className="paint">{icons.paint}</span>
         Display
       </MenuStyle>
       <TweetButtonStyle>Tweet</TweetButtonStyle>
