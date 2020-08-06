@@ -8,7 +8,11 @@ export default function LoginPage() {
   const { handleSubmit, register, errors } = useForm();
   const onSubmit = (values) => {
     console.log(values);
-    Axios.post("http://localhost:8080/api/auth/login", { ...values });
+    Axios.post(
+      "http://localhost:8080/api/auth/login",
+      { ...values },
+      { withCredentials: true }
+    );
   };
 
   let LoginStyle = styled.div`

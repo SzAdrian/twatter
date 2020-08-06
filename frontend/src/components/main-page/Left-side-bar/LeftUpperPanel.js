@@ -67,7 +67,7 @@ export default function LeftUpperPanel() {
       <MenuStyle>
         <TwatterLogo width="28px" heigth="28px" />
       </MenuStyle>
-      <MenuStyle to="/">
+      <MenuStyle to="/home">
         {icons.home}
         Home
       </MenuStyle>
