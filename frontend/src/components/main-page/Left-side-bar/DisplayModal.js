@@ -7,7 +7,7 @@ import ChangeSecondary from "components/ChangeSecondary";
 
 const DisplayModalStyled = styled.div`
   position: fixed;
-  z-index: 50;
+  z-index: 100;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -92,17 +92,17 @@ const DisplayModalStyled = styled.div`
   }
 `;
 let FadeBackground = styled.div`
-  z-index: 100;
+  position: fixed;
   background-color: rgba(110, 118, 125, 0.4);
   width: 100vw;
   height: 100vh;
-  z-index: 500;
+  z-index: 50;
 `;
 function DisplayModal() {
   return (
     <>
       <MainPage />
-      <FadeBackground />
+      <FadeBackground onClick={() => { window.location.href = "/home" }} />
       <DisplayModalStyled>
         <div className="Custom-text"></div>
         <div className="font-sizes"></div>
