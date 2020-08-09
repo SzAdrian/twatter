@@ -24,7 +24,7 @@ function RightSideBar() {
         <RightSideBarStyle>
             <SearchBar />
             <TrendsForYou />
-            <WhoToFollow />
+            <WhoToFollow title="Who to follow" />
             <SidebarFooter />
         </RightSideBarStyle>
     )

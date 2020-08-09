@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 @Configuration
-@Profile({"development", "no_db"})
+@Profile({"development", "no_db & !security"})
 public class PrototypingSecurityConfig extends BaseSecurityConfig {
 
     public PrototypingSecurityConfig(JwtFilter jwtFilter) {
@@ -17,17 +17,13 @@ public class PrototypingSecurityConfig extends BaseSecurityConfig {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http
-            .cors()
-                .and()
             .csrf()
                 .disable()
             .authorizeRequests()
                 .antMatchers("/dev/login")
                     .permitAll()
                 .anyRequest()
-                    .authenticated()
-                .and()
-            .exceptionHandling()
-                .authenticationEntryPoint((req, resp, e) -> resp.sendRedirect("/dev/login"));
+                    .authenticated();
+
     }
 }

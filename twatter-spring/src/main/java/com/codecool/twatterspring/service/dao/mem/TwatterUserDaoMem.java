@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Profile("development & no_db")
+@Profile({"development & no_db", "test & no_db"})
 @Qualifier("twatterUserDao")
 public class TwatterUserDaoMem implements TwatterUserDao {
 
