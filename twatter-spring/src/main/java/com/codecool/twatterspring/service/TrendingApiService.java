@@ -38,7 +38,6 @@ public class TrendingApiService {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Collections.singletonList(MediaType.ALL));
         HttpEntity<String> request = new HttpEntity<>(null, headers);
-        System.out.println(request.toString());
         ResponseEntity<TrendingHashtagsDTO> response = template.exchange(
                 baseUrl + "/" + interval,
                 HttpMethod.GET,
