@@ -13,6 +13,6 @@ namespace Twatter_Backend_csharp.Context
         {
         }
 
-        public DbSet<Hashtag> Hashtags { get; set; }
+        public DbSet<Hashtag> hashtags { get; set; }
     }
 }

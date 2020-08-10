@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Twatter_Backend_csharp.Repositories.Interface;
 
-namespace Twatter_Backend_csharp.UnitOfWork.Interface
+namespace Twatter_Backend_csharp.Units.Interface
 {
     public interface IUnitOfWork
     {

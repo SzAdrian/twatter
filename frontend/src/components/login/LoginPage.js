@@ -1,12 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import InputField from "./InputField";
 import TwatterLogo from "../shared/TwatterLogo";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import Axios from "axios";
+import { UserContext } from "components/Context/UserContext";
+import storage from "local-storage-fallback";
 
 export default function LoginPage() {
   const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (values) => console.log(values);
+  const { user, setUser } = useContext(UserContext);
+  const onSubmit = (values) => {
+    Axios.post(
+      "http://localhost:8080/api/auth/login",
+      { ...values },
+      { withCredentials: true }
+    ).then(({ data }) => {
+      data == -1
+        ? (window.location.href = "/login")
+        : Axios.get(`http://localhost:8080/api/users/${data}`, {
+            withCredentials: true,
+          }).then(({ data }) => {
+            storage.setItem("user", JSON.stringify(data));
+            setUser(data);
+            window.location.href = "/home";
+          });
+    });
+  };
 
   let LoginStyle = styled.div`
     max-width: 600px;
@@ -19,11 +39,10 @@ export default function LoginPage() {
     flex-direction: column;
 
     .h1 {
-      color: "white";
-      margin-top: "30px";
-      margin-bottom: "10px";
-
-      overflow-wrap: "break-word";
+      color: white;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
 
       text-align: center;
     }
@@ -134,18 +153,24 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
           refi={register({
-            validate: (value) => value !== "fasz" || "Nice try!",
+            required: "Required",
           })}
           type="text"
-          name="username_or_email"
+          name="username"
           label="Phone, e-mail, or username"
         />
 
-        <InputField type="password" name="password" label="Password" />
+        <InputField
+          refi={register({
+            required: "Required",
+          })}
+          type="password"
+          name="password"
+          label="Password"
+        />
         <button className="button" type="submit">
           <span>Log in</span>
         </button>
-        {errors.username_or_email && errors.username_or_email.message}
       </form>
       <div className="links">
         <a href="#">Forgot password?</a>
