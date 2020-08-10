@@ -28,7 +28,7 @@ public class Tweet {
     @EqualsAndHashCode.Exclude
     private LocalDateTime date;
 
-    public Tweet fromDTO(IncomingTweetDTO dto) {
+    public static Tweet fromDTO(IncomingTweetDTO dto) {
         return dto == null ? null : Tweet.builder()
                 .userId(dto.getUserId())
                 .content(dto.getContent())
