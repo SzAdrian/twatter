@@ -1,13 +1,12 @@
 package com.codecool.twatterspring.repository;
 
 import com.codecool.twatterspring.model.TwatterUser;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Optional;
 import java.util.List;
+import java.util.Optional;
 
 public interface TwatterUserRepository extends CrudRepository<TwatterUser, Long> {
     Optional<TwatterUser> findByName(String username);

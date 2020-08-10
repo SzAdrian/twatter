@@ -17,7 +17,7 @@ public class TrendingTweetDTO {
     private String content;
     private String postedAt;
 
-    public TrendingTweetDTO fromEntity(Tweet tweet) {
+    public static TrendingTweetDTO fromEntity(Tweet tweet) {
         return tweet == null ? null : TrendingTweetDTO.builder()
                 .id(tweet.getId())
                 .content(tweet.getContent())

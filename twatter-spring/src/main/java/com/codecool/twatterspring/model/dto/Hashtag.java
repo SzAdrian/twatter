@@ -1,6 +1,5 @@
 package com.codecool.twatterspring.model.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
