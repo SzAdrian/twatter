@@ -25,15 +25,15 @@ public class TweetService {
     private final TrendingApiService trending;
 
     public OutgoingTweetDTO handleNewTweet(IncomingTweetDTO dto) {
-        Tweet tweet = tweets.save(new Tweet().fromDTO(dto));
+        Tweet tweet = tweets.save(Tweet.fromDTO(dto));
         trending.postNewTweet(new TrendingTweetDTO().fromEntity(tweet));
 
-        return new OutgoingTweetDTO().fromEntity(tweet);
+        return OutgoingTweetDTO.fromEntity(tweet);
     }
     public List<TimelineTweetDTO> provideTweetsForUserTimelineBy(Long userId) {
         List<Tweet> userTweets = tweets.findAllByUserId(userId);
         return userTweets.stream()
-                         .map(tweet -> new TimelineTweetDTO().fromEntity(
+                         .map(tweet -> TimelineTweetDTO.fromEntity(
                                  tweet,
                                  users.getUsernameByUserId(tweet.getUserId()))
                          )
@@ -48,7 +48,7 @@ public class TweetService {
         List<Tweet> followeeTweets = tweets.findLimitedNumberOfTweetsByFolloweeIds(followeeIds);
 
         return followeeTweets.stream()
-                             .map(tweet -> new TimelineTweetDTO().fromEntity(
+                             .map(tweet -> TimelineTweetDTO.fromEntity(
                                      tweet,
                                      users.getUsernameByUserId(tweet.getUserId()))
                              )

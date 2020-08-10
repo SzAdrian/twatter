@@ -16,7 +16,7 @@ public class OutgoingTweetDTO {
     private Long id;
     private String postedAt;
 
-    public OutgoingTweetDTO fromEntity(Tweet tweet) {
+    public static OutgoingTweetDTO fromEntity(Tweet tweet) {
         return tweet == null ? null : OutgoingTweetDTO.builder()
                 .id(tweet.getId())
                 .postedAt(Long.toString(tweet.getDate().toEpochSecond(ZoneOffset.UTC)))
