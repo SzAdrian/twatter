@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import Axios from "axios";
+import storage from "local-storage-fallback";
 
 export const AuthContext = createContext();
 
@@ -20,6 +21,7 @@ function AuthContextProvider(props) {
   };
 
   const logout = () => {
+    storage.removeItem("user");
     Axios.post(
       "http://localhost:8080/api/auth/logout",
       {},
