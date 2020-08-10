@@ -74,9 +74,7 @@ class AuthControllerSecurityTest extends AbstractControllerSecurityTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
         )
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(content().string("true"));
+            .andExpect(status().isOk());
     }
     
     private Cookie createTokenCookie() {
