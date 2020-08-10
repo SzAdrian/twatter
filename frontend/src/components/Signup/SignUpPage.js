@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import LoginPage from "components/login/LoginPage";
 import styled from "styled-components";
 import InputField from "components/login/InputField";
@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import Axios from "axios";
+import { AuthContext } from "components/Context/AuthContext";
 
 let SignUpPageStyle = styled.div`
   display: flex;
@@ -164,12 +165,10 @@ let SignUpPageStyle = styled.div`
 
 function SignUp() {
   const { handleSubmit, register, errors } = useForm();
+  const { signup } = useContext(AuthContext);
+
   const onSubmit = (values) => {
-    console.log(values);
-    Axios.post("http://localhost:8080/api/auth/register", {
-      username: values.name,
-      password: values.password,
-    });
+    signup(values);
   };
 
   return (
