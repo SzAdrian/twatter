@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/api/auth")
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthService authService;
