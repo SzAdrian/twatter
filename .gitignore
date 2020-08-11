@@ -348,3 +348,4 @@ obj/
 
 # adding c# appsettings in order not to commit db credentials
 appsettings.json
+frontend/.env

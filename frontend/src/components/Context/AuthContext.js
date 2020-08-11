@@ -8,10 +8,16 @@ function AuthContextProvider(props) {
   const [isLogged, setisLogged] = useState(null);
 
   const signup = (values) => {
-    Axios.post("http://localhost:8080/api/auth/register", {
-      username: values.name,
-      password: values.password,
-    }).then((resp) => {
+    Axios.post(
+      process.env.REACT_APP_API_URL +
+        ":" +
+        process.env.REACT_APP_PORT +
+        "/api/auth/register",
+      {
+        username: values.name,
+        password: values.password,
+      }
+    ).then((resp) => {
       if (resp.data) {
         login(values);
       }
@@ -20,18 +26,26 @@ function AuthContextProvider(props) {
 
   const login = (values) => {
     Axios.post(
-      "http://localhost:8080/api/auth/login",
+      process.env.REACT_APP_API_URL +
+        ":" +
+        process.env.REACT_APP_PORT +
+        "/api/auth/login",
       {
-        username: values.name,
+        username: values.username,
         password: values.password,
       },
       { withCredentials: true }
     ).then(({ data }) => {
       data == -1
         ? (window.location.href = "/login")
-        : Axios.get(`http://localhost:8080/api/users/${data}`, {
-            withCredentials: true,
-          }).then(({ data }) => {
+        : Axios.get(
+            `${
+              process.env.REACT_APP_API_URL + ":" + process.env.REACT_APP_PORT
+            }/api/users/${data}`,
+            {
+              withCredentials: true,
+            }
+          ).then(({ data }) => {
             storage.setItem("user", JSON.stringify(data));
             window.location.href = "/home";
           });
@@ -39,9 +53,15 @@ function AuthContextProvider(props) {
   };
 
   const isLoggedIn = () => {
-    Axios.get("http://localhost:8080/api/auth/isloggedin", {
-      withCredentials: true,
-    })
+    Axios.get(
+      process.env.REACT_APP_API_URL +
+        ":" +
+        process.env.REACT_APP_PORT +
+        "/api/auth/isloggedin",
+      {
+        withCredentials: true,
+      }
+    )
       .then((resp) => {
         console.log(resp);
         setisLogged(resp.data);
@@ -54,7 +74,10 @@ function AuthContextProvider(props) {
   const logout = () => {
     storage.removeItem("user");
     Axios.post(
-      "http://localhost:8080/api/auth/logout",
+      process.env.REACT_APP_API_URL +
+        ":" +
+        process.env.REACT_APP_PORT +
+        "/api/auth/logout",
       {},
       {
         withCredentials: true,
