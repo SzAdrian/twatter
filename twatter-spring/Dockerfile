@@ -2,7 +2,7 @@ FROM maven:3.6.3-jdk-14 AS MAVEN_BUILD
 
 COPY ./ ./
 
-RUN mvn clean package -Dmaven.test.skip=true 
+RUN mvn clean package
 
 FROM openjdk:14-alpine
 
