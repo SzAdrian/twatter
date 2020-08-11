@@ -39,7 +39,7 @@ let SignUpPageStyle = styled.div`
       border-bottom-right-radius: 15px;
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
-      background-color: rgb(21, 32, 43);
+      background-color: var(--background);
     }
     .modal-content {
       display: flex;
@@ -67,12 +67,12 @@ let SignUpPageStyle = styled.div`
       margin: 10px 30px;
     }
     h1 {
-      color: white;
+      color: var(--foreground);
       font-size: 23px;
       margin: 20px 0px;
     }
     h2 {
-      color: white;
+      color: var(--foreground);
       font-size: 18px;
       margin: 20px 0px;
     }
