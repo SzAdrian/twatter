@@ -4,14 +4,12 @@ import com.codecool.twatterspring.model.dto.TrendingHashtagsDTO;
 import com.codecool.twatterspring.service.TrendingApiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/trends")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class TrendController {
 
     private final TrendingApiService trends;
