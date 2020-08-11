@@ -8,6 +8,7 @@ pipelines:
           script: 
             - cd frontend
             - npm install
+            - unset CI 
             - npm run build
             - pip install awscli --upgrade --ignore-installed six
             - aws s3 sync ./build s3://mastery-twatter
