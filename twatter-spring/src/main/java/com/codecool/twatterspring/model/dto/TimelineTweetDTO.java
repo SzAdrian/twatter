@@ -19,7 +19,7 @@ public class TimelineTweetDTO {
     private String username;
     private String postedAt;
 
-    public TimelineTweetDTO fromEntity(Tweet tweet, String username) {
+    public static TimelineTweetDTO fromEntity(Tweet tweet, String username) {
         return tweet == null ? null : TimelineTweetDTO.builder()
                 .id(tweet.getId())
                 .content(tweet.getContent())
