@@ -1,0 +1,14 @@
+image: nikolaik/python-nodejs
+
+pipelines:    
+  default:
+      - step:
+          caches:
+            - node
+          script: 
+            - cd frontend
+            - npm install
+            - npm run build
+            - pip install awscli --upgrade --ignore-installed six
+            - aws s3 sync ./build s3://mastery-twatter
+            - aws s3 cp --cache-control max-age=0 ./build/service-worker.js s3://mastery-twatter/
