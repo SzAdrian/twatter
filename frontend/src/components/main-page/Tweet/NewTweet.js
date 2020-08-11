@@ -27,9 +27,12 @@ const NewTweetStyle = styled.div`
     }
     
     input {
+        outline: none;
         background-color: var(--background);
         color: rgb(136, 153, 166);
         border: 0;
+        resize: horizontal;
+        width: 100%;
         height: 50px;
         font-weight: 300;
         font-size: 2.2rem;
@@ -55,7 +58,7 @@ const NewTweetStyle = styled.div`
         height: 35px;
         font-weight: 600;
         color: white;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         display: flex;
         cursor: pointer;
         justify-content: center;
