@@ -9,7 +9,7 @@ let TextInput = styled.input`
   width: 100%;
   height: 20px;
   outline: none;
-  color: white;
+  color: var(--foreground);
 
   border: none;
 `;
@@ -21,7 +21,7 @@ let Label = styled.label`
   font: 15px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Ubuntu, "Helvetica Neue", sans-serif;
   :focus-within {
-    color: rgb(29, 161, 242);
+    color: var(--secondary);
   }
 
   text-overflow: ellipsis;
@@ -44,7 +44,7 @@ let Field = styled.div`
   margin-right: auto;
   margin-bottom: 20px;
   height: 60px;
-  background-color: rgb(25, 39, 52);
+  background-color: var(--offSetBackground);
   box-sizing: border-box;
   border-radius: 2px;
   /*max-width: 375px;*/
@@ -62,7 +62,7 @@ let Field = styled.div`
 
   padding: 3px;
   :focus-within {
-    border-bottom-color: rgb(29, 161, 242);
+    border-bottom-color: var(--secondary);
   }
 `;
 
